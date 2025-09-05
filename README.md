@@ -1,135 +1,154 @@
-# Turborepo starter
+# Form Builder Monorepo
 
-This Turborepo starter is maintained by the Turborepo core team.
-
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest
-```
+A modern form builder application built with Next.js and TypeScript, organized as a Turborepo monorepo.
 
 ## What's inside?
 
 This Turborepo includes the following packages/apps:
 
-### Apps and Packages
+### Applications
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- **`form-builder`**: Main form builder application built with Next.js 15
+- **`docs`**: Documentation site built with Next.js 15
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+### Packages
 
-### Utilities
+- **`@repo/core-ui`**: Design system and reusable UI components (React library)
+- **`@repo/form-ui-library`**: Form-specific UI components and logic (depends on core-ui)
+- **`@repo/eslint-config`**: Shared ESLint configurations
+- **`@repo/typescript-config`**: Shared TypeScript configurations
 
-This Turborepo has some additional tools already setup for you:
+Each package/app is 100% [TypeScript](https://www.typescriptlang.org/) with strict mode enabled.
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+## Technology Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript 5.9 (strict mode)
+- **Package Manager**: pnpm 9.0.0
+- **Build Tool**: Turborepo 2.5.6
+- **Styling**: CSS Modules
+- **Linting**: ESLint 9.34.0
+- **Formatting**: Prettier 3.6.2
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js >= 22
+- pnpm 9.0.0
+
+### Installation
+
+```sh
+# Install dependencies
+pnpm install
+```
+
+## Development
 
 ### Build
 
-To build all apps and packages, run the following command:
+To build all apps and packages:
 
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+```sh
+pnpm build
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+To build a specific package:
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+```sh
+# Build form-builder app
+pnpm build --filter=form-builder
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+# Build docs app
+pnpm build --filter=docs
 
-### Develop
+# Build core-ui package
+pnpm build --filter=@repo/core-ui
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+# Build form-ui-library package
+pnpm build --filter=@repo/form-ui-library
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+### Development Server
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
+To start all development servers:
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+```sh
+pnpm dev
 ```
 
-### Remote Caching
+To start a specific app:
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+```sh
+# Start form-builder app (runs on http://localhost:3000)
+pnpm dev --filter=form-builder
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+# Start docs app (runs on http://localhost:3001)
+pnpm dev --filter=docs
+```
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+### Linting and Type Checking
+
+```sh
+# Lint all packages
+pnpm lint
+
+# Check types across all packages
+pnpm check-types
+
+# Format code
+pnpm format
+```
+
+## Project Structure
 
 ```
-cd my-turborepo
+form-builder/
+├── apps/
+│   ├── form-builder/          # Main form builder application
+│   └── docs/                  # Documentation site
+├── packages/
+│   ├── core-ui/              # Design system components
+│   ├── form-ui-library/      # Form-specific components
+│   ├── eslint-config/        # Shared ESLint configs
+│   └── typescript-config/    # Shared TypeScript configs
+├── package.json              # Root package.json
+├── pnpm-workspace.yaml       # pnpm workspace config
+└── turbo.json               # Turborepo config
+```
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
+## Package Dependencies
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
+- **form-builder** → `@repo/core-ui`, `@repo/form-ui-library`
+- **docs** → `@repo/core-ui`
+- **form-ui-library** → `@repo/core-ui`
+- **core-ui** → (no internal dependencies)
+
+## Remote Caching
+
+This project uses Turborepo's remote caching for faster builds. To enable remote caching:
+
+```sh
+# Login to Vercel (if you have an account)
 npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
+# Link your repository to remote cache
 npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
 ```
+
+## Contributing
+
+1. Make sure you have the prerequisites installed
+2. Install dependencies: `pnpm install`
+3. Start development servers: `pnpm dev`
+4. Make your changes
+5. Run linting and type checking: `pnpm lint && pnpm check-types`
+6. Format your code: `pnpm format`
 
 ## Useful Links
 
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+- [Turborepo Documentation](https://turborepo.com/docs)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [pnpm Documentation](https://pnpm.io/)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)

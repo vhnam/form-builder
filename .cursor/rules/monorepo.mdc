@@ -1,0 +1,37 @@
+---
+description: "Monorepo configuration and project structure rules"
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Monorepo Configuration
+
+This is a TypeScript monorepo using pnpm workspaces with the following structure:
+
+## Project Structure
+- **Apps**: `apps/*` - Next.js applications
+- **Packages**: `packages/*` - Shared libraries and utilities
+
+## Projects
+
+### Applications
+- **form-builder** (`apps/form-builder`): Main form builder application (Next.js)
+- **docs** (`apps/docs`): Documentation site (Next.js)
+
+### Packages
+- **core-ui** (`packages/core-ui`): Design system and UI components (React)
+- **form-ui-library** (`packages/form-ui-library`): Form-specific UI components (React)
+- **eslint-config** (`packages/eslint-config`): Shared ESLint configurations
+- **typescript-config** (`packages/typescript-config`): Shared TypeScript configurations
+
+## Dependencies
+- `form-builder` depends on: `form-ui-library`, `core-ui`
+- `docs` depends on: `core-ui`
+- `form-ui-library` depends on: `core-ui`
+- `core-ui` has no internal dependencies
+
+## Development Guidelines
+- Use pnpm for package management
+- Follow TypeScript strict mode
+- Use the shared ESLint and TypeScript configurations
+- Maintain proper dependency relationships between packages

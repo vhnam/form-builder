@@ -1,0 +1,60 @@
+---
+description: "Shared packages development rules"
+globs: ["packages/**/*"]
+alwaysApply: true
+---
+
+# Shared Packages
+
+This directory contains shared packages used across the monorepo.
+
+## Package Structure
+
+### Core UI (`packages/core-ui`)
+- **Purpose**: Design system and reusable UI components
+- **Framework**: React
+- **Type**: Design system
+- **Dependencies**: None (base design system)
+
+### Form UI Library (`packages/form-ui-library`)
+- **Purpose**: Form-specific UI components and logic
+- **Framework**: React
+- **Type**: Library
+- **Dependencies**: `core-ui`
+
+### ESLint Config (`packages/eslint-config`)
+- **Purpose**: Shared ESLint configurations
+- **Type**: Configuration package
+- **Dependencies**: None
+
+### TypeScript Config (`packages/typescript-config`)
+- **Purpose**: Shared TypeScript configurations
+- **Type**: Configuration package
+- **Dependencies**: None
+
+## Development Guidelines
+
+### Package Development
+- Use TypeScript strict mode
+- Export components and utilities through `src/index.ts`
+- Follow semantic versioning
+- Use proper package.json configurations
+- Include proper TypeScript declarations
+
+### Component Development
+- Use functional components with hooks
+- Implement proper TypeScript interfaces
+- Follow accessibility best practices
+- Use consistent naming conventions
+- Document component props and usage
+
+### Build Configuration
+- Use appropriate build tools (Vite for React libraries)
+- Generate proper type declarations
+- Optimize bundle size
+- Follow the monorepo's shared configurations
+
+## Import Patterns
+- Use `@repo/package-name` for internal package imports
+- Avoid circular dependencies
+- Maintain clear dependency hierarchy: core-ui → form-ui-library → applications

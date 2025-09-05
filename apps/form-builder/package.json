@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "form-builder",
   "version": "0.1.0",
   "type": "module",
   "private": true,
@@ -11,7 +11,8 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "@repo/ui": "workspace:*",
+    "@repo/core-ui": "workspace:*",
+    "@repo/form-ui-library": "workspace:*",
     "next": "^15.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"

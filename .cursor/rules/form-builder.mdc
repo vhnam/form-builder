@@ -1,0 +1,34 @@
+---
+description: "Form builder application specific rules"
+globs: ["apps/form-builder/**/*"]
+alwaysApply: true
+---
+
+# Form Builder Application
+
+This is the main form builder application built with Next.js.
+
+## Technology Stack
+- **Framework**: Next.js 14+ with App Router
+- **Language**: TypeScript (strict mode)
+- **Styling**: CSS Modules
+- **Dependencies**: 
+  - `form-ui-library` - Form components
+  - `core-ui` - Design system components
+
+## Development Guidelines
+- Use App Router patterns (`app/` directory)
+- Follow Next.js best practices for server/client components
+- Import components from `@repo/form-ui-library` and `@repo/core-ui`
+- Use TypeScript strict mode
+- Follow the established file structure:
+  - `app/` - Next.js app router pages and layouts
+  - `components/` - Application-specific components
+  - `lib/` - Utility functions and configurations
+  - `types/` - TypeScript type definitions
+
+## Code Style
+- Use functional components with hooks
+- Prefer server components when possible
+- Use proper TypeScript types for all props and state
+- Follow the monorepo's ESLint configuration
