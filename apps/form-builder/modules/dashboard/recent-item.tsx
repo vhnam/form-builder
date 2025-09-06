@@ -30,7 +30,7 @@ const RecentItem = (form: Form) => {
   };
 
   const handleEditForm = (form: Form) => {
-    console.log(form);
+    router.push(privateRoutes.forms.edit.replace('[id]', form.id));
   };
 
   const handleDuplicateForm = (form: Form) => {
@@ -38,10 +38,10 @@ const RecentItem = (form: Form) => {
   };
 
   const handleSelectForm = (form: Form) => {
-    router.push(privateRoutes.forms.edit.replace('[id]', form.id));
+    router.push(privateRoutes.forms.preview.replace('[id]', form.id));
   };
 
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString: number) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
@@ -70,16 +70,29 @@ const RecentItem = (form: Form) => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => handleEditForm(form)}>
+              <DropdownMenuItem
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleEditForm(form);
+                }}
+              >
                 <Edit3Icon className="mr-2 size-4" />
                 Edit
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleDuplicateForm(form)}>
+              <DropdownMenuItem
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDuplicateForm(form);
+                }}
+              >
                 <CopyIcon className="mr-2 size-4" />
                 Duplicate
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={() => handleDeleteFormId(form.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteFormId(form.id);
+                }}
                 className="text-red-600 focus:text-red-600"
               >
                 <Trash2Icon className="mr-2 size-4" />

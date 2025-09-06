@@ -1,5 +1,7 @@
+import FormList from '@/modules/form-list/form-list';
+
 const FormListPage = () => {
-  return <div>FormListPage</div>;
+  return <FormList />;
 };
 
 export default FormListPage;

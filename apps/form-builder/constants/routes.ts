@@ -4,6 +4,7 @@ export const privateRoutes = {
     list: '/app/forms',
     new: '/app/forms/new',
     edit: '/app/forms/[id]',
+    preview: '/app/forms/[id]/preview',
   },
 };
 
