@@ -16,7 +16,7 @@ This directory contains shared packages used across the monorepo.
 - **Type**: Design system
 - **Dependencies**: None (base design system)
 
-### Form UI Library (`packages/form-ui-library`)
+### Form UI Library (`packages/form-ui`)
 - **Purpose**: Form-specific UI components and logic
 - **Framework**: React
 - **Type**: Library
@@ -57,4 +57,4 @@ This directory contains shared packages used across the monorepo.
 ## Import Patterns
 - Use `@repo/package-name` for internal package imports
 - Avoid circular dependencies
-- Maintain clear dependency hierarchy: core-ui → form-ui-library → applications
+- Maintain clear dependency hierarchy: core-ui → form-ui → applications

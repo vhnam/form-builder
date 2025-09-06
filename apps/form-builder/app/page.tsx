@@ -1,6 +1,6 @@
 "use client";
 
-import { FormRenderer } from "@repo/form-ui-library";
+import { FormRenderer } from "@repo/form-ui";
 
 const config = {
   type: "form",

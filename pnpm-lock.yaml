@@ -60,9 +60,9 @@ importers:
       '@repo/core-ui':
         specifier: workspace:*
         version: link:../../packages/core-ui
-      '@repo/form-ui-library':
+      '@repo/form-ui':
         specifier: workspace:*
-        version: link:../../packages/form-ui-library
+        version: link:../../packages/form-ui
       next:
         specifier: ^15.5.0
         version: 15.5.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -204,7 +204,7 @@ importers:
         specifier: ^8.40.0
         version: 8.40.0(eslint@9.34.0(jiti@2.5.1))(typescript@5.9.2)
 
-  packages/form-ui-library:
+  packages/form-ui:
     dependencies:
       '@repo/core-ui':
         specifier: workspace:*

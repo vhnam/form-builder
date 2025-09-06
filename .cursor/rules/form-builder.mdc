@@ -13,13 +13,13 @@ This is the main form builder application built with Next.js.
 - **Language**: TypeScript (strict mode)
 - **Styling**: CSS Modules
 - **Dependencies**: 
-  - `form-ui-library` - Form components
+  - `form-ui` - Form components
   - `core-ui` - Design system components
 
 ## Development Guidelines
 - Use App Router patterns (`app/` directory)
 - Follow Next.js best practices for server/client components
-- Import components from `@repo/form-ui-library` and `@repo/core-ui`
+- Import components from `@repo/form-ui` and `@repo/core-ui`
 - Use TypeScript strict mode
 - Follow the established file structure:
   - `app/` - Next.js app router pages and layouts

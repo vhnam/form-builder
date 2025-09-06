@@ -14,7 +14,7 @@ This Turborepo includes the following packages/apps:
 ### Packages
 
 - **`@repo/core-ui`**: Design system and reusable UI components (React library)
-- **`@repo/form-ui-library`**: Form-specific UI components and logic (depends on core-ui)
+- **`@repo/form-ui`**: Form-specific UI components and logic (depends on core-ui)
 - **`@repo/eslint-config`**: Shared ESLint configurations
 - **`@repo/typescript-config`**: Shared TypeScript configurations
 
@@ -66,8 +66,8 @@ pnpm build --filter=docs
 # Build core-ui package
 pnpm build --filter=@repo/core-ui
 
-# Build form-ui-library package
-pnpm build --filter=@repo/form-ui-library
+# Build form-ui package
+pnpm build --filter=@repo/form-ui
 ```
 
 ### Development Server
@@ -110,7 +110,7 @@ form-builder/
 │   └── docs/                  # Documentation site
 ├── packages/
 │   ├── core-ui/              # Design system components
-│   ├── form-ui-library/      # Form-specific components
+│   ├── form-ui/      # Form-specific components
 │   ├── eslint-config/        # Shared ESLint configs
 │   └── typescript-config/    # Shared TypeScript configs
 ├── package.json              # Root package.json
@@ -120,9 +120,9 @@ form-builder/
 
 ## Package Dependencies
 
-- **form-builder** → `@repo/core-ui`, `@repo/form-ui-library`
+- **form-builder** → `@repo/core-ui`, `@repo/form-ui`
 - **docs** → `@repo/core-ui`
-- **form-ui-library** → `@repo/core-ui`
+- **form-ui** → `@repo/core-ui`
 - **core-ui** → (no internal dependencies)
 
 ## Remote Caching

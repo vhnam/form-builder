@@ -20,14 +20,14 @@ This is a TypeScript monorepo using pnpm workspaces with the following structure
 
 ### Packages
 - **core-ui** (`packages/core-ui`): Design system and UI components (React)
-- **form-ui-library** (`packages/form-ui-library`): Form-specific UI components (React)
+- **form-ui** (`packages/form-ui`): Form-specific UI components (React)
 - **eslint-config** (`packages/eslint-config`): Shared ESLint configurations
 - **typescript-config** (`packages/typescript-config`): Shared TypeScript configurations
 
 ## Dependencies
-- `form-builder` depends on: `form-ui-library`, `core-ui`
+- `form-builder` depends on: `form-ui`, `core-ui`
 - `docs` depends on: `core-ui`
-- `form-ui-library` depends on: `core-ui`
+- `form-ui` depends on: `core-ui`
 - `core-ui` has no internal dependencies
 
 ## Development Guidelines
