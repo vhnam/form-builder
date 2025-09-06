@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@/constants/*": ["./constants/*"],
       "@/modules/*": ["./modules/*"],
       "@/providers/*": ["./providers/*"],
       "@/schemas/*": ["./schemas/*"],

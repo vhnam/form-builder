@@ -20,21 +20,37 @@ import {
 
 import { publicRoutes } from '@/constants/routes';
 
-import useSignInFormActions from './sign-in-form.actions';
+import useSignUpFormActions from './sign-up-form.actions';
 
-const SignInForm = () => {
-  const { form, onSubmit, isPending } = useSignInFormActions();
+const SignUpForm = () => {
+  const { form, onSubmit, isPending } = useSignUpFormActions();
 
   return (
     <Card>
       <CardHeader className="text-center">
-        <CardTitle className="text-xl">Welcome back</CardTitle>
+        <CardTitle className="text-xl">Create you Account</CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="grid gap-6">
               <div className="grid gap-6">
+                <div className="grid gap-3">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="shadcn" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
                 <div className="grid gap-3">
                   <FormField
                     control={form.control}
@@ -83,18 +99,18 @@ const SignInForm = () => {
                   {isPending ? (
                     <Loader2Icon className="size-4 animate-spin" />
                   ) : (
-                    'Sign In'
+                    'Sign Up'
                   )}
                 </Button>
               </div>
 
               <div className="text-center text-sm">
-                Don&apos;t have an account?{' '}
+                Already have an account?{' '}
                 <Link
-                  href={publicRoutes.auth.signUp}
+                  href={publicRoutes.auth.signIn}
                   className="underline underline-offset-4"
                 >
-                  Sign Up
+                  Sign In
                 </Link>
               </div>
             </div>
@@ -105,4 +121,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default SignUpForm;

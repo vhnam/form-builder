@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { SignInForm } from '@/modules/sign-in/sign-in-form';
+import { SignUpForm } from '@/modules/sign-up/sign-up-form';
 
 export const metadata = {
-  title: 'Sign In | Form Builder',
+  title: 'Sign Up | Form Builder',
 };
 
-const LoginPage = () => {
+const SignUpPage = () => {
   return (
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
       <div className="flex w-full max-w-sm flex-col gap-6">
@@ -26,10 +26,10 @@ const LoginPage = () => {
           </div>
           Form Builder
         </Link>
-        <SignInForm />
+        <SignUpForm />
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignUpPage;

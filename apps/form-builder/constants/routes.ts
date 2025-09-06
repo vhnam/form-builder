@@ -1,6 +1,6 @@
-const privateRoutes = {};
+export const privateRoutes = {};
 
-const publicRoutes = {
+export const publicRoutes = {
   auth: {
     signIn: '/auth/sign-in',
     signUp: '/auth/sign-up',
@@ -8,5 +8,3 @@ const publicRoutes = {
     resetPassword: '/auth/reset-password',
   },
 };
-
-export { privateRoutes, publicRoutes };
