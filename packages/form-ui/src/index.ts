@@ -1,3 +1,3 @@
-import "./styles/global.css";
+import './styles/global.css';
 
-export * from "./components/FormRenderer";
+export * from './components/FormRenderer';

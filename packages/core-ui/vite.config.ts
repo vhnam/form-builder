@@ -1,8 +1,8 @@
-import { defineConfig } from "vite";
-import dts from "unplugin-dts/vite";
-import path from "path";
-import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import dts from 'unplugin-dts/vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [
@@ -15,19 +15,19 @@ export default defineConfig({
   build: {
     lib: {
       entry: {
-        index: path.resolve(__dirname, "src/index.ts"),
-        components: path.resolve(__dirname, "src/components/index.ts"),
+        index: path.resolve(__dirname, 'src/index.ts'),
+        components: path.resolve(__dirname, 'src/components/index.ts'),
       },
-      name: "CoreUI",
+      name: 'CoreUI',
       fileName: (format, entryName) => `${entryName}.${format}.js`,
-      formats: ["es"],
+      formats: ['es'],
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: ['react', 'react-dom'],
       output: {
         globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
+          react: 'React',
+          'react-dom': 'ReactDOM',
         },
       },
     },
@@ -35,7 +35,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      '@': path.resolve(__dirname, 'src'),
     },
   },
 });

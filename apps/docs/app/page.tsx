@@ -1,8 +1,8 @@
-import Image, { type ImageProps } from "next/image";
-import { Button } from "@repo/core-ui/components";
-import styles from "./page.module.css";
+import styles from './page.module.css';
+import { Button } from '@repo/core-ui/components';
+import Image, { type ImageProps } from 'next/image';
 
-type Props = Omit<ImageProps, "src"> & {
+type Props = Omit<ImageProps, 'src'> & {
   srcLight: string;
   srcDark: string;
 };

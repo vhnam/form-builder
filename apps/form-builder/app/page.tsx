@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { FormRenderer } from "@repo/form-ui";
+import { FormRenderer } from '@repo/form-ui';
 
 const config = {
-  type: "form",
-  fields: [{ type: "text", name: "name" }],
+  type: 'form',
+  fields: [{ type: 'text', name: 'name' }],
 };
 
 const HomePage = () => {

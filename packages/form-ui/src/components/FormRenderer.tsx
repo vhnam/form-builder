@@ -1,5 +1,6 @@
-import { Button } from "@repo/core-ui/components";
-import React from "react";
+import React from 'react';
+
+import { Button } from '@repo/core-ui/components';
 
 type FormConfig = Record<string, unknown>;
 type FormData = Record<string, unknown>;
