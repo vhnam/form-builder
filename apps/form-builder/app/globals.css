@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-@import "@repo/core-ui/styles";
-@import "@repo/form-ui/styles";
+@import '@repo/core-ui/styles';
+@import '@repo/form-ui/styles';

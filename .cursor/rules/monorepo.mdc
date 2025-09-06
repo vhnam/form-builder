@@ -16,7 +16,6 @@ This is a TypeScript monorepo using pnpm workspaces with the following structure
 
 ### Applications
 - **form-builder** (`apps/form-builder`): Main form builder application (Next.js)
-- **docs** (`apps/docs`): Documentation site (Next.js)
 
 ### Packages
 - **core-ui** (`packages/core-ui`): Design system and UI components (React)

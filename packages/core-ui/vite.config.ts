@@ -17,6 +17,7 @@ export default defineConfig({
       entry: {
         index: path.resolve(__dirname, 'src/index.ts'),
         components: path.resolve(__dirname, 'src/components/index.ts'),
+        lib: path.resolve(__dirname, 'src/lib/index.ts'),
       },
       name: 'CoreUI',
       fileName: (format, entryName) => `${entryName}.${format}.js`,

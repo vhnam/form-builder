@@ -11,6 +11,7 @@ export default {
           "^@?\\w",
           "^@/components/(.*)$",
           "^@/lib/(.*)$",
+          "^@/hooks/(.*)$",
           "^[./]",
         ],
       },

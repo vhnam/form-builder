@@ -1,6 +1,13 @@
-export const privateRoutes = {};
+export const privateRoutes = {
+  home: '/app',
+  forms: {
+    list: '/app/forms',
+    new: '/app/forms/new',
+  },
+};
 
 export const publicRoutes = {
+  landing: '/',
   auth: {
     signIn: '/auth/sign-in',
     signUp: '/auth/sign-up',
