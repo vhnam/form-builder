@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Button } from '@repo/core-ui/components';
 
 type FormConfig = Record<string, unknown>;
@@ -10,7 +8,7 @@ type Props = {
   onSubmit?: (data: FormData) => void;
 };
 
-export const FormRenderer: React.FC<Props> = ({ config }) => {
+export const FormRenderer = ({ config }: Props) => {
   return (
     <div>
       <pre>{JSON.stringify(config, null, 2)}</pre>

@@ -10,7 +10,11 @@ export default {
         importOrder: [
           '^(?!@repo)@?\\w',
           '^@repo/(.*)$',
+          '^@/providers/(.*)$',
+          '^@/schemas/(.*)$',
+          '^@/services/(.*)$',
           '^@/components/(.*)$',
+          '^@/modules/(.*)$',
           '^[./]',
         ],
       },

@@ -7,7 +7,12 @@ export default {
     {
       files: "**/*.{ts,tsx}",
       options: {
-        importOrder: ["^@?\\w", "^@/lib/(.*)$", "^@/components/(.*)$", "^[./]"],
+        importOrder: [
+          "^@?\\w",
+          "^@/components/(.*)$",
+          "^@/lib/(.*)$",
+          "^[./]",
+        ],
       },
     },
   ],
