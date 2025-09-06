@@ -10,6 +10,9 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.es.js"
     },
+    "./types": {
+      "types": "./dist/types/index.d.ts"
+    },
     "./styles": "./dist/style.css"
   },
   "scripts": {

@@ -3,6 +3,7 @@ export const privateRoutes = {
   forms: {
     list: '/app/forms',
     new: '/app/forms/new',
+    edit: '/app/forms/[id]',
   },
 };
 

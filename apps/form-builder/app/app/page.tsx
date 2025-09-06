@@ -1,5 +1,7 @@
-const MainPage = () => {
-  return <div>MainPage</div>;
+import { Dashboard } from '@/modules/dashboard';
+
+const DashboardPage = () => {
+  return <Dashboard />;
 };
 
-export default MainPage;
+export default DashboardPage;
