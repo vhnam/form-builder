@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import {
   type ForgotPasswordFormSchema,
   forgotPasswordFormSchema,
-} from '@/schemas/forgot-password-form';
+} from '@/schemas/auth';
 
 import { useForgotPasswordMutation } from '@/services/auth';
 
@@ -18,8 +18,8 @@ const useForgotPasswordFormActions = () => {
     },
   });
 
-  const onSubmit = async (values: ForgotPasswordFormSchema) => {
-    return await mutateAsync(values);
+  const onSubmit = async (payload: ForgotPasswordFormSchema) => {
+    return await mutateAsync(payload);
   };
 
   return { form, onSubmit, isPending };

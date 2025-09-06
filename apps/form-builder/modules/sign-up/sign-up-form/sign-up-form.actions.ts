@@ -1,10 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
-import {
-  type SignUpFormSchema,
-  signUpFormSchema,
-} from '@/schemas/sign-up-form';
+import { type SignUpFormSchema, signUpFormSchema } from '@/schemas/auth';
 
 import { useSignUpMutation } from '@/services/auth';
 
@@ -19,8 +16,8 @@ const useSignUpFormActions = () => {
     },
   });
 
-  const onSubmit = async (values: SignUpFormSchema) => {
-    return await mutateAsync(values);
+  const onSubmit = async (payload: SignUpFormSchema) => {
+    return await mutateAsync(payload);
   };
 
   return { form, onSubmit, isPending };

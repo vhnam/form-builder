@@ -1,27 +1,29 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { ForgotPasswordFormSchema } from '@/schemas/forgot-password-form';
-import { SignInFormSchema } from '@/schemas/sign-in-form';
-import { SignUpFormSchema } from '@/schemas/sign-up-form';
+import type {
+  ForgotPasswordFormSchema,
+  SignInFormSchema,
+  SignUpFormSchema,
+} from '@/schemas/auth';
 
 export const useSignInMutation = () => {
   return useMutation({
-    mutationFn: (values: SignInFormSchema) =>
-      axios.post('/api/auth/sign-in', values),
+    mutationFn: (payload: SignInFormSchema) =>
+      axios.post('/api/auth/sign-in', payload),
   });
 };
 
 export const useSignUpMutation = () => {
   return useMutation({
-    mutationFn: (values: SignUpFormSchema) =>
-      axios.post('/api/auth/sign-up', values),
+    mutationFn: (payload: SignUpFormSchema) =>
+      axios.post('/api/auth/sign-up', payload),
   });
 };
 
 export const useForgotPasswordMutation = () => {
   return useMutation({
-    mutationFn: (values: ForgotPasswordFormSchema) =>
-      axios.post('/api/auth/forgot-password', values),
+    mutationFn: (payload: ForgotPasswordFormSchema) =>
+      axios.post('/api/auth/forgot-password', payload),
   });
 };
