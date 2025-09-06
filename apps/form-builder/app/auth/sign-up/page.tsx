@@ -1,4 +1,4 @@
-import { SignUpForm } from '@/modules/sign-up/sign-up-form';
+import { SignUpForm } from '@/modules/auth/sign-up-form';
 
 export const metadata = {
   title: 'Sign Up | Form Builder',

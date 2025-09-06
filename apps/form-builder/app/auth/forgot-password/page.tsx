@@ -1,4 +1,4 @@
-import { ForgotPasswordForm } from '@/modules/forgot-password/forgot-password-form';
+import { ForgotPasswordForm } from '@/modules/auth/forgot-password-form';
 
 export const metadata = {
   title: 'Forgot Password | Form Builder',
