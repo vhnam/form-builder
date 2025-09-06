@@ -10,15 +10,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.es.js"
     },
-    "./button": {
-      "types": "./dist/button.d.ts",
-      "import": "./dist/button.es.js"
+    "./components": {
+      "types": "./dist/components.d.ts",
+      "import": "./dist/components.es.js"
     },
-    "./card": {
-      "types": "./dist/card.d.ts",
-      "import": "./dist/card.es.js"
-    },
-    "./styles": "./dist/style.css"
+    "./styles": "./dist/core-ui.css"
   },
   "scripts": {
     "dev": "vite",
@@ -37,8 +33,8 @@
     "eslint": "^9.34.0",
     "tw-animate-css": "^1.3.8",
     "typescript": "5.9.2",
-    "vite": "^5.0.0",
-    "vite-plugin-dts": "^3.6.0"
+    "unplugin-dts": "1.0.0-beta.6",
+    "vite": "^7.0.0"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",

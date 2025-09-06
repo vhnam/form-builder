@@ -1,4 +1,4 @@
-import { Button } from "@repo/core-ui/button";
+import { Button } from "@repo/core-ui/components";
 import React from "react";
 
 type FormConfig = Record<string, unknown>;

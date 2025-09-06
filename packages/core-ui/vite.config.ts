@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import dts from "vite-plugin-dts";
+import dts from "unplugin-dts/vite";
 import path from "path";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
@@ -16,8 +16,7 @@ export default defineConfig({
     lib: {
       entry: {
         index: path.resolve(__dirname, "src/index.ts"),
-        button: path.resolve(__dirname, "src/components/ui/button.tsx"),
-        card: path.resolve(__dirname, "src/components/ui/card.tsx"),
+        components: path.resolve(__dirname, "src/components/index.ts"),
       },
       name: "CoreUI",
       fileName: (format, entryName) => `${entryName}.${format}.js`,
@@ -29,12 +28,6 @@ export default defineConfig({
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
-        },
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === "global.css") {
-            return "styles.css";
-          }
-          return assetInfo.name || "assets/[name].[ext]";
         },
       },
     },
