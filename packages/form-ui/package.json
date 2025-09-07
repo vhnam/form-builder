@@ -12,18 +12,15 @@
   },
   "dependencies": {
     "@repo/core-ui": "workspace:*",
+    "json-logic-js": "^2.0.2",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "json-logic-js": "^2.0.2"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@vitejs/plugin-react": "^4.2.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
-    "vite": "^5.0.0",
-    "vite-plugin-dts": "^3.6.0",
     "typescript": "^5.2.0"
   }
 }
