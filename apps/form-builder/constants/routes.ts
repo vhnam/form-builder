@@ -1,4 +1,4 @@
-export const privateRoutes = {
+export const PRIVATE_ROUTES = {
   home: '/app',
   forms: {
     list: '/app/forms',
@@ -8,7 +8,7 @@ export const privateRoutes = {
   },
 };
 
-export const publicRoutes = {
+export const PUBLIC_ROUTES = {
   landing: '/',
   auth: {
     signIn: '/auth/sign-in',

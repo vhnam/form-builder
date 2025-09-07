@@ -3,7 +3,7 @@
 import { Loader2Icon } from 'lucide-react';
 import Link from 'next/link';
 
-import { publicRoutes } from '@/constants/routes';
+import { PUBLIC_ROUTES } from '@/constants/routes';
 
 import { Button } from '@repo/core-ui/components/button';
 import {
@@ -73,7 +73,7 @@ const SignInForm = () => {
                       )}
                     />
                     <Link
-                      href={publicRoutes.auth.forgotPassword}
+                      href={PUBLIC_ROUTES.auth.forgotPassword}
                       className="ml-auto text-sm underline-offset-4 hover:underline"
                     >
                       Forgot your password?
@@ -93,7 +93,7 @@ const SignInForm = () => {
               <div className="text-center text-sm">
                 Don&apos;t have an account?{' '}
                 <Link
-                  href={publicRoutes.auth.signUp}
+                  href={PUBLIC_ROUTES.auth.signUp}
                   className="underline underline-offset-4"
                 >
                   Sign Up

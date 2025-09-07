@@ -2,7 +2,7 @@ import { FileTextIcon, HomeIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { privateRoutes } from '@/constants/routes';
+import { PRIVATE_ROUTES } from '@/constants/routes';
 
 import {
   SidebarGroup,
@@ -14,12 +14,12 @@ import {
 const items = [
   {
     title: 'Home',
-    url: privateRoutes.home,
+    url: PRIVATE_ROUTES.home,
     icon: HomeIcon,
   },
   {
     title: 'Forms',
-    url: privateRoutes.forms.list,
+    url: PRIVATE_ROUTES.forms.list,
     icon: FileTextIcon,
   },
 ];

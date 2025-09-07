@@ -3,7 +3,7 @@
 import { PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-import { privateRoutes } from '@/constants/routes';
+import { PRIVATE_ROUTES } from '@/constants/routes';
 
 import { Card, CardContent } from '@repo/core-ui/components/card';
 
@@ -11,7 +11,7 @@ const NewItem = () => {
   const router = useRouter();
 
   const handleCreateNew = () => {
-    router.push(privateRoutes.forms.new);
+    router.push(PRIVATE_ROUTES.forms.new);
   };
 
   return (

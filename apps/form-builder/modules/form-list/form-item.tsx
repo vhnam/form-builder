@@ -1,30 +1,18 @@
 'use client';
 
-import {
-  CopyIcon,
-  Edit3Icon,
-  FileTextIcon,
-  MoreHorizontalIcon,
-  Trash2Icon,
-} from 'lucide-react';
+import { FileTextIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
-import { privateRoutes } from '@/constants/routes';
+import { PRIVATE_ROUTES } from '@/constants/routes';
 
 import type { IForm, ISection } from '@repo/form-ui/types/form';
 
-import { Button } from '@repo/core-ui/components/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@repo/core-ui/components/dropdown-menu';
+import FormContextMenu from '@/components/form-context-menu';
 
 interface FormItemProps {
   form: IForm;
-  onDelete: (formId: string) => void;
+  onDelete: (form: IForm) => void;
 }
 
 const FormItem = ({ form, onDelete }: FormItemProps) => {
@@ -37,12 +25,12 @@ const FormItem = ({ form, onDelete }: FormItemProps) => {
     );
   }, [form]);
 
-  const handleDeleteFormId = (formId: string) => {
-    onDelete(formId);
+  const handleDeleteForm = (form: IForm) => {
+    onDelete(form);
   };
 
   const handleEditForm = (form: IForm) => {
-    router.push(privateRoutes.forms.edit.replace('[id]', form.id));
+    router.push(PRIVATE_ROUTES.forms.edit.replace('[id]', form.id));
   };
 
   const handleDuplicateForm = (form: IForm) => {
@@ -50,7 +38,7 @@ const FormItem = ({ form, onDelete }: FormItemProps) => {
   };
 
   const handleSelectForm = (form: IForm) => {
-    router.push(privateRoutes.forms.preview.replace('[id]', form.id));
+    router.push(PRIVATE_ROUTES.forms.preview.replace('[id]', form.id));
   };
 
   const formatDate = (dateString: number) => {
@@ -71,8 +59,10 @@ const FormItem = ({ form, onDelete }: FormItemProps) => {
         <div className="flex items-center gap-4">
           <FileTextIcon className="h-6 w-6 text-blue-600" />
           <div>
-            <h4 className="font-medium text-gray-900">{form.title}</h4>
-            <div className="mt-1 flex items-center gap-4 text-sm text-gray-600">
+            <h4 className="font-display font-medium text-gray-900">
+              {form.title}
+            </h4>
+            <div className="mt-1 flex items-center gap-4 truncate text-sm text-gray-600">
               <span>{numberOfQuestions} questions</span>
               {form.sections.length > 0 && (
                 <span>{form.sections.length} sections</span>
@@ -81,47 +71,12 @@ const FormItem = ({ form, onDelete }: FormItemProps) => {
             </div>
           </div>
         </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <MoreHorizontalIcon className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem
-              onClick={(e) => {
-                e.stopPropagation();
-                handleEditForm(form);
-              }}
-            >
-              <Edit3Icon className="mr-2 h-4 w-4" />
-              Edit
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={(e) => {
-                e.stopPropagation();
-                handleDuplicateForm(form);
-              }}
-            >
-              <CopyIcon className="mr-2 h-4 w-4" />
-              Duplicate
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={(e) => {
-                e.stopPropagation();
-                handleDeleteFormId(form.id);
-              }}
-              className="text-red-600 focus:text-red-600"
-            >
-              <Trash2Icon className="mr-2 h-4 w-4" />
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <FormContextMenu
+          form={form}
+          onEdit={handleEditForm}
+          onDuplicate={handleDuplicateForm}
+          onDelete={handleDeleteForm}
+        />
       </div>
     </>
   );

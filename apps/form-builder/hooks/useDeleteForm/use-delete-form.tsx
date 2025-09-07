@@ -2,12 +2,14 @@
 
 import { useState } from 'react';
 
+import { type IForm } from '@repo/form-ui/types/form';
+
 const useDeleteForm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formToDelete, setFormToDelete] = useState<string | null>(null);
 
-  const openDeleteFormDialog = (formId: string) => {
-    setFormToDelete(formId);
+  const openDeleteFormDialog = (form: IForm) => {
+    setFormToDelete(form.id);
     setIsOpen(true);
   };
 

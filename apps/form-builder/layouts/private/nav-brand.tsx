@@ -1,7 +1,8 @@
-import { GalleryVerticalEndIcon } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
-import { privateRoutes } from '@/constants/routes';
+import { BRAND_LOGO, BRAND_NAME } from '@/constants/branding';
+import { PRIVATE_ROUTES } from '@/constants/routes';
 
 import {
   SidebarMenu,
@@ -14,12 +15,21 @@ const NavBrand = () => {
     <SidebarMenu>
       <SidebarMenuItem>
         <SidebarMenuButton size="lg" asChild>
-          <Link href={privateRoutes.home}>
+          <Link href={PRIVATE_ROUTES.home}>
             <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-              <GalleryVerticalEndIcon className="size-4" />
+              <Image
+                src={BRAND_LOGO}
+                alt={BRAND_NAME}
+                width={48}
+                height={48}
+                priority
+                className="rounded-md"
+              />
             </div>
             <div className="flex flex-col gap-0.5 leading-none">
-              <span className="text-lg font-medium">Form Builder</span>
+              <span className="font-display text-lg font-medium">
+                {BRAND_NAME}
+              </span>
             </div>
           </Link>
         </SidebarMenuButton>
