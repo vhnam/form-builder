@@ -3,8 +3,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@/components/*": ["./components/*"],
+      "@/hooks/*": ["./hooks/*"],
       "@/constants/*": ["./constants/*"],
       "@/layouts/*": ["./layouts/*"],
+      "@/mocks/*": ["./mocks/*"],
       "@/modules/*": ["./modules/*"],
       "@/providers/*": ["./providers/*"],
       "@/schemas/*": ["./schemas/*"],
@@ -23,7 +26,5 @@
     "next.config.js",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

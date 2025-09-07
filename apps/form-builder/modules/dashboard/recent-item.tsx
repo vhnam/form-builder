@@ -22,11 +22,16 @@ import { type Form } from '@repo/form-ui/types';
 
 import { privateRoutes } from '@/constants/routes';
 
-const RecentItem = (form: Form) => {
+interface RecentItemProps {
+  form: Form;
+  onDelete: (formId: string) => void;
+}
+
+const RecentItem = ({ form, onDelete }: RecentItemProps) => {
   const router = useRouter();
 
   const handleDeleteFormId = (formId: string) => {
-    console.log(formId);
+    onDelete(formId);
   };
 
   const handleEditForm = (form: Form) => {

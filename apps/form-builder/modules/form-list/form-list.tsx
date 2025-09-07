@@ -1,13 +1,15 @@
 'use client';
 
-import { recentForms } from 'mocks/forms';
+import useDeleteForm from '@/hooks/useDeleteForm';
 
-import FormDeleteDialog from './form-delete-dialog';
+import FormDeleteDialog from '@/components/form-delete-dialog';
+
 import FormItem from './form-item';
-import { useDeleteForm } from './form-list.actions';
+
+import { recentForms } from '@/mocks/forms';
 
 const FormList = () => {
-  const { isOpen, closeDeleteDialog, onDeleteForm, openDeleteDialog } =
+  const { isOpen, closeDeleteFormDialog, onDeleteForm, openDeleteFormDialog } =
     useDeleteForm();
 
   return (
@@ -23,7 +25,7 @@ const FormList = () => {
                 <FormItem
                   key={form.id}
                   form={form}
-                  onDelete={openDeleteDialog}
+                  onDelete={openDeleteFormDialog}
                 />
               ))}
             </div>
@@ -33,7 +35,7 @@ const FormList = () => {
 
       <FormDeleteDialog
         isOpen={isOpen}
-        onClose={closeDeleteDialog}
+        onClose={closeDeleteFormDialog}
         onDeleteForm={onDeleteForm}
       />
     </>

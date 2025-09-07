@@ -2,16 +2,16 @@
 
 import { useState } from 'react';
 
-export const useDeleteForm = () => {
+const useDeleteForm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formToDelete, setFormToDelete] = useState<string | null>(null);
 
-  const openDeleteDialog = (formId: string) => {
+  const openDeleteFormDialog = (formId: string) => {
     setFormToDelete(formId);
     setIsOpen(true);
   };
 
-  const closeDeleteDialog = () => {
+  const closeDeleteFormDialog = () => {
     setIsOpen(false);
     setFormToDelete(null);
   };
@@ -20,15 +20,17 @@ export const useDeleteForm = () => {
     if (formToDelete) {
       // TODO: Implement actual delete logic here
       console.log('Deleting form:', formToDelete);
-      closeDeleteDialog();
+      closeDeleteFormDialog();
     }
   };
 
   return {
     isOpen,
     formToDelete,
-    openDeleteDialog,
-    closeDeleteDialog,
+    openDeleteFormDialog,
+    closeDeleteFormDialog,
     onDeleteForm: handleDeleteForm,
   };
 };
+
+export default useDeleteForm;
