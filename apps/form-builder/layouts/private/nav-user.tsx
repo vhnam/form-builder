@@ -6,6 +6,8 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
+} from '@repo/core-ui/components/avatar';
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -13,11 +15,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+} from '@repo/core-ui/components/dropdown-menu';
+import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from '@repo/core-ui/components';
+} from '@repo/core-ui/components/sidebar';
 
 interface NavUserProps {
   user: {

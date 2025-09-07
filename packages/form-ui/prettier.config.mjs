@@ -9,8 +9,11 @@ export default {
       options: {
         importOrder: [
           '^(?!@repo)@?\\w',
-          '^@repo/(.*)$',
-          '^@/components/(.*)$',
+          '^@repo/core-ui/lib/(.*)$',
+          '^@repo/core-ui/hooks/(.*)$',
+          '^@repo/form-ui/types/(.*)$',
+          '^@repo/form-ui/components/(.*)$',
+          '^@repo/core-ui/components/(.*)$',
           '^[./]',
         ],
       },

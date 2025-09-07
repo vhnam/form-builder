@@ -3,22 +3,24 @@
 import { Loader2Icon } from 'lucide-react';
 import Link from 'next/link';
 
+import { publicRoutes } from '@/constants/routes';
+
+import { Button } from '@repo/core-ui/components/button';
 import {
-  Button,
   Card,
   CardContent,
   CardHeader,
   CardTitle,
+} from '@repo/core-ui/components/card';
+import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-} from '@repo/core-ui/components';
-
-import { publicRoutes } from '@/constants/routes';
+} from '@repo/core-ui/components/form';
+import { Input } from '@repo/core-ui/components/input';
 
 import useSignInFormActions from './sign-in-form.actions';
 

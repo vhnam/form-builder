@@ -6,7 +6,7 @@ import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from '@repo/core-ui/components';
+} from '@repo/core-ui/components/sidebar';
 
 import AppSidebar from './app-sidebar';
 

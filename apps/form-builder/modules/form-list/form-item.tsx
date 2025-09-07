@@ -10,19 +10,20 @@ import {
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
+import { privateRoutes } from '@/constants/routes';
+
+import type { IForm, ISection } from '@repo/form-ui/types/form';
+
+import { Button } from '@repo/core-ui/components/button';
 import {
-  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@repo/core-ui/components';
-import type { Form, Section } from '@repo/form-ui/types';
-
-import { privateRoutes } from '@/constants/routes';
+} from '@repo/core-ui/components/dropdown-menu';
 
 interface FormItemProps {
-  form: Form;
+  form: IForm;
   onDelete: (formId: string) => void;
 }
 
@@ -31,7 +32,7 @@ const FormItem = ({ form, onDelete }: FormItemProps) => {
 
   const numberOfQuestions = useMemo(() => {
     return form.sections.reduce(
-      (acc, section: Section) => acc + section.fields.length,
+      (acc, section: ISection) => acc + section.fields.length,
       0
     );
   }, [form]);
@@ -40,15 +41,15 @@ const FormItem = ({ form, onDelete }: FormItemProps) => {
     onDelete(formId);
   };
 
-  const handleEditForm = (form: Form) => {
+  const handleEditForm = (form: IForm) => {
     router.push(privateRoutes.forms.edit.replace('[id]', form.id));
   };
 
-  const handleDuplicateForm = (form: Form) => {
+  const handleDuplicateForm = (form: IForm) => {
     console.log(form);
   };
 
-  const handleSelectForm = (form: Form) => {
+  const handleSelectForm = (form: IForm) => {
     router.push(privateRoutes.forms.preview.replace('[id]', form.id));
   };
 

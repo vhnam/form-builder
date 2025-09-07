@@ -1,9 +1,9 @@
+import '@repo/core-ui/globals.css';
+
 import type { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
 
 import QueryProvider from '@/providers/query';
-
-import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Form Builder',

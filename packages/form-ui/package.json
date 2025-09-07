@@ -3,21 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "main": "dist/index.es.js",
-  "types": "dist/index.d.ts",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.es.js"
-    },
-    "./types": {
-      "types": "./dist/types/index.d.ts"
-    },
-    "./styles": "./dist/style.css"
+    "./types/*": "./src/types/*.ts",
+    "./components/*": "./src/components/*.tsx"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
     "lint": "eslint ."
   },
   "dependencies": {

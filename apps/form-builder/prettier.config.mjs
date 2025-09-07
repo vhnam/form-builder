@@ -9,13 +9,17 @@ export default {
       options: {
         importOrder: [
           '^(?!@repo)@?\\w',
-          '^@repo/(.*)$',
           '^@/constants/(.*)$',
+          '^@repo/core-ui/lib(.*)$',
           '^@/hooks/(.*)$',
+          '^@repo/core-ui/hooks(.*)$',
           '^@/providers/(.*)$',
           '^@/schemas/(.*)$',
+          '^@repo/form-ui/types(.*)$',
           '^@/services/(.*)$',
           '^@/components/(.*)$',
+          '^@repo/core-ui/components(.*)$',
+          '^@repo/form-ui/components(.*)$',
           '^@/modules/(.*)$',
           '^[./]',
           '^@/mocks/(.*)$',

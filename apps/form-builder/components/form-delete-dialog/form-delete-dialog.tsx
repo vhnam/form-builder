@@ -9,7 +9,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@repo/core-ui/components';
+} from '@repo/core-ui/components/alert-dialog';
 
 interface FormDeleteDialogProps {
   isOpen: boolean;

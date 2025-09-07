@@ -1,13 +1,13 @@
 import { GalleryVerticalEndIcon } from 'lucide-react';
 import Link from 'next/link';
 
+import { privateRoutes } from '@/constants/routes';
+
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from '@repo/core-ui/components';
-
-import { privateRoutes } from '@/constants/routes';
+} from '@repo/core-ui/components/sidebar';
 
 const NavBrand = () => {
   return (

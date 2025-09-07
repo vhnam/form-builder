@@ -1,6 +1,6 @@
-import { Form } from '@repo/form-ui/types';
+import { IForm } from '@repo/form-ui/types/form';
 
-export const recentForms: Form[] = [
+export const recentForms: IForm[] = [
   {
     id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
     title: 'Customer Feedback Survey',

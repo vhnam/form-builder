@@ -1,13 +1,13 @@
-export interface Section {
+export interface ISection {
   id: string;
   title: string;
   description: string;
-  fields: Field[];
+  fields: IField[];
   order: number;
   showInfo: boolean;
 }
 
-export interface Field {
+export interface IField {
   id: string;
   sectionId: string;
   type: string;
@@ -17,11 +17,11 @@ export interface Field {
   order: number;
 }
 
-export interface Form {
+export interface IForm {
   id: string;
   title: string;
   description: string;
-  sections: Section[];
+  sections: ISection[];
   createdAt: number;
   updatedAt: number;
 }

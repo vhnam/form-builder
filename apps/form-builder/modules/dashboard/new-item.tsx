@@ -3,9 +3,9 @@
 import { PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-import { Card, CardContent } from '@repo/core-ui/components';
-
 import { privateRoutes } from '@/constants/routes';
+
+import { Card, CardContent } from '@repo/core-ui/components/card';
 
 const NewItem = () => {
   const router = useRouter();

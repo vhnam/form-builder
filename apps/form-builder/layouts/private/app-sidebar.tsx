@@ -7,7 +7,7 @@ import {
   SidebarGroupContent,
   SidebarHeader,
   SidebarRail,
-} from '@repo/core-ui/components';
+} from '@repo/core-ui/components/sidebar';
 
 import NavBrand from './nav-brand';
 import NavMain from './nav-main';

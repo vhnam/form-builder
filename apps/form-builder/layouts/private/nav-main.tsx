@@ -2,14 +2,14 @@ import { FileTextIcon, HomeIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { privateRoutes } from '@/constants/routes';
+
 import {
   SidebarGroup,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from '@repo/core-ui/components';
-
-import { privateRoutes } from '@/constants/routes';
+} from '@repo/core-ui/components/sidebar';
 
 const items = [
   {

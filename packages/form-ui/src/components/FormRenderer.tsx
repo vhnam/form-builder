@@ -1,4 +1,4 @@
-import { Button } from '@repo/core-ui/components';
+import { Button } from '@repo/core-ui/components/button';
 
 type FormConfig = Record<string, unknown>;
 type FormData = Record<string, unknown>;
