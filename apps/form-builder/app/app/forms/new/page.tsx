@@ -1,5 +1,9 @@
+'use client';
+
+import FormNew from '@/modules/form-new';
+
 const NewFormPage = () => {
-  return <div>NewFormPage</div>;
+  return <FormNew />;
 };
 
 export default NewFormPage;

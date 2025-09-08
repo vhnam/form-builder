@@ -1,5 +1,7 @@
+import FormEdit from '@/modules/form-edit';
+
 const FormDetailsPage = () => {
-  return <div>FormDetailsPage</div>;
+  return <FormEdit />;
 };
 
 export default FormDetailsPage;

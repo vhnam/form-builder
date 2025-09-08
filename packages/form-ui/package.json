@@ -5,9 +5,10 @@
   "type": "module",
   "exports": {
     "./components/*": "./src/components/*.tsx",
-    "./utils/*": "./src/utils/*.tsx",
+    "./enums/*": "./src/enums/*.ts",
     "./hooks/*": "./src/hooks/*.tsx",
-    "./types/*": "./src/types/*.ts"
+    "./types/*": "./src/types/*.ts",
+    "./utils/*": "./src/utils/*.tsx"
   },
   "scripts": {
     "lint": "eslint .",

@@ -6,6 +6,7 @@ import { PropsWithChildren } from 'react';
 import { BRAND_DESCRIPTION, BRAND_NAME } from '@/constants/branding';
 
 import QueryProvider from '@/providers/query';
+import ThemeProvider from '@/providers/theme';
 
 export const metadata: Metadata = {
   title: BRAND_NAME,
@@ -14,9 +15,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en">
-      <body>
-        <QueryProvider>{children}</QueryProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className="font-sans antialiased">
+        <QueryProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );

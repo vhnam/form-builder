@@ -3,6 +3,8 @@ export default {
   singleQuote: true,
   trailingComma: 'es5',
   printWidth: 80,
+  useTabs: false,
+  tabWidth: 2,
   insertPragma: false,
   requirePragma: false,
   importOrderSeparation: true,
