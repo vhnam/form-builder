@@ -1,5 +1,5 @@
 {
-  "name": "form-builder",
+  "name": "loki-form",
   "private": true,
   "scripts": {
     "build": "turbo run build",
