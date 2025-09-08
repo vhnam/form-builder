@@ -2,6 +2,8 @@
 
 import { BadgeCheckIcon, ChevronsUpDown, LogOutIcon } from 'lucide-react';
 
+import { useClientOnly } from '@repo/core-ui/hooks/use-client-only';
+
 import {
   Avatar,
   AvatarFallback,
@@ -33,6 +35,27 @@ interface NavUserProps {
 
 const NavUser = ({ user }: NavUserProps) => {
   const { isMobile } = useSidebar();
+  const hasMounted = useClientOnly();
+
+  if (!hasMounted) {
+    return (
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <SidebarMenuButton size="lg">
+            <Avatar className="h-8 w-8 rounded-lg">
+              <AvatarImage src={user.avatar} alt={user.name} />
+              <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+            </Avatar>
+            <div className="grid flex-1 text-left text-sm leading-tight">
+              <span className="truncate font-medium">{user.name}</span>
+              <span className="truncate text-xs">{user.email}</span>
+            </div>
+            <ChevronsUpDown className="ml-auto size-4" />
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    );
+  }
 
   return (
     <SidebarMenu>

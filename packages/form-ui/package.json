@@ -5,6 +5,8 @@
   "type": "module",
   "exports": {
     "./components/*": "./src/components/*.tsx",
+    "./utils/*": "./src/utils/*.tsx",
+    "./hooks/*": "./src/hooks/*.tsx",
     "./types/*": "./src/types/*.ts"
   },
   "scripts": {
@@ -13,6 +15,7 @@
   },
   "dependencies": {
     "@repo/core-ui": "workspace:*",
+    "lucide-react": "^0.542.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tailwindcss": "^4.1.13"
