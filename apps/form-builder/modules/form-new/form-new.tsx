@@ -59,13 +59,13 @@ const FormNew = () => {
               <Collapsible
                 open={true}
                 onOpenChange={() => {}}
-                className="flex w-full flex-col gap-2 rounded-md border border-gray-200 p-4"
+                className="flex w-full flex-col gap-2 rounded-md border border-gray-200 p-4 dark:border-gray-700"
                 key={section.id}
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-sm font-medium">{section.title}</h3>
-                    <p className="text-xs text-gray-500">
+                    <h3 className="text-sm font-medium dark:text-gray-100">{section.title}</h3>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
                       {section.description}
                     </p>
                   </div>
@@ -131,7 +131,7 @@ const FormNew = () => {
                     {section.fields.map((field) => (
                       <div
                         key={field.id}
-                        className="flex items-center border-t border-gray-200 pt-2 text-sm"
+                        className="flex items-center border-t border-gray-200 pt-2 text-sm dark:border-gray-700 dark:text-gray-300"
                       >
                         <div className="w-1/6">
                           {
@@ -167,7 +167,7 @@ const FormNew = () => {
         <CardFooter>
           <Button
             variant="outline"
-            className="mt-4 w-full border-2 border-dashed border-gray-300 py-8 text-gray-600 hover:border-blue-400 hover:text-blue-600"
+            className="mt-4 w-full border-2 border-dashed border-gray-300 py-8 text-gray-600 hover:border-blue-400 hover:text-blue-600 dark:border-gray-600 dark:text-gray-400 dark:hover:border-blue-400 dark:hover:text-blue-400"
           >
             <PlusIcon className="mr-2 h-5 w-5" />
             Add another field

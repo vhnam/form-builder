@@ -5,8 +5,6 @@ import {
   Trash2Icon,
 } from 'lucide-react';
 
-import { type IForm } from '@repo/form-ui/types/form';
-
 import { Button } from '@repo/core-ui/components/button';
 import {
   DropdownMenu,
@@ -14,6 +12,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@repo/core-ui/components/dropdown-menu';
+import { type IForm } from '@repo/form-ui/types/form';
 
 interface FormContextMenuProps {
   form: IForm;
@@ -59,7 +58,7 @@ const FormContextMenu = ({
             e.stopPropagation();
             onDelete(form);
           }}
-          className="text-red-600 focus:text-red-600"
+          className="text-red-600 focus:text-red-600 dark:text-red-400 dark:focus:text-red-400"
         >
           <Trash2Icon className="mr-2 size-4" />
           Delete

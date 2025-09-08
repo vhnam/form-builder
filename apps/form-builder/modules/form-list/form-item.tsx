@@ -51,16 +51,16 @@ const FormItem = ({ form, onDelete }: FormItemProps) => {
     <>
       <div
         key={form.id}
-        className="flex cursor-pointer items-center justify-between px-6 py-4 hover:bg-gray-50"
+        className="flex cursor-pointer items-center justify-between px-6 py-4 hover:bg-gray-50 dark:hover:bg-gray-700"
         onClick={() => handleSelectForm(form)}
       >
         <div className="flex items-center gap-4">
-          <FileTextIcon className="h-6 w-6 text-blue-600" />
+          <FileTextIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
           <div>
-            <h4 className="font-display font-medium text-gray-900">
+            <h4 className="font-display font-medium text-gray-900 dark:text-gray-100">
               {form.title}
             </h4>
-            <div className="mt-1 flex items-center gap-4 truncate text-sm text-gray-600">
+            <div className="mt-1 flex items-center gap-4 truncate text-sm text-gray-600 dark:text-gray-400">
               <span>{numberOfQuestions} questions</span>
               {form.sections.length > 0 && (
                 <span>{form.sections.length} sections</span>

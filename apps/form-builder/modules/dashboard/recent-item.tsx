@@ -49,7 +49,7 @@ const RecentItem = ({ form, onDelete }: RecentItemProps) => {
     >
       <CardContent className="p-4">
         <div className="mb-3 flex items-start justify-between">
-          <FileTextIcon className="h-8 w-8 text-blue-600" />
+          <FileTextIcon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
           <FormContextMenu
             form={form}
             onEdit={handleEditForm}
@@ -57,10 +57,10 @@ const RecentItem = ({ form, onDelete }: RecentItemProps) => {
             onDelete={handleDeleteForm}
           />
         </div>
-        <h4 className="font-display mb-1 truncate font-medium text-gray-900">
+        <h4 className="font-display mb-1 truncate font-medium text-gray-900 dark:text-gray-100">
           {form.title}
         </h4>
-        <p className="text-xs text-gray-600">{formatDate(form.updatedAt)}</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400">{formatDate(form.updatedAt)}</p>
       </CardContent>
     </Card>
   );

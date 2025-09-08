@@ -16,13 +16,13 @@ const FormList = () => {
     <>
       <div className="flex flex-1">
         <div className="flex-1 p-6">
-          <div className="rounded-lg border border-gray-200 bg-white">
-            <div className="border-b border-gray-200 px-6 py-4">
-              <h3 className="font-display text-lg font-semibold text-gray-900">
+          <div className="bg-card text-card-foreground rounded-lg border border-gray-200">
+            <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-700">
+              <h3 className="font-display text-lg font-semibold text-gray-900 dark:text-gray-100">
                 Forms
               </h3>
             </div>
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-gray-200 dark:divide-gray-700">
               {recentForms.map((form) => (
                 <FormItem
                   key={form.id}
