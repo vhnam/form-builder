@@ -5,6 +5,8 @@ import {
   Trash2Icon,
 } from 'lucide-react';
 
+import { type IForm } from '@repo/form-ui/types/form';
+
 import { Button } from '@repo/core-ui/components/button';
 import {
   DropdownMenu,
@@ -12,7 +14,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@repo/core-ui/components/dropdown-menu';
-import { type IForm } from '@repo/form-ui/types/form';
 
 interface FormContextMenuProps {
   form: IForm;

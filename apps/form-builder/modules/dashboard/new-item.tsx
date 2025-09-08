@@ -19,8 +19,12 @@ const NewItem = () => {
     >
       <CardContent className="p-6 text-center">
         <PlusIcon className="mx-auto mb-3 h-12 w-12 text-gray-400 dark:text-gray-500" />
-        <h4 className="font-medium text-gray-900 dark:text-gray-100">Blank Form</h4>
-        <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">Start from scratch</p>
+        <h4 className="font-medium text-gray-900 dark:text-gray-100">
+          Blank Form
+        </h4>
+        <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+          Start from scratch
+        </p>
       </CardContent>
     </Card>
   );

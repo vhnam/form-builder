@@ -15,6 +15,7 @@ export default {
           '^@repo/core-ui/hooks(.*)$',
           '^@/providers/(.*)$',
           '^@/schemas/(.*)$',
+          '^@repo/form-ui/enums(.*)$',
           '^@repo/form-ui/types(.*)$',
           '^@/services/(.*)$',
           '^@/components/(.*)$',

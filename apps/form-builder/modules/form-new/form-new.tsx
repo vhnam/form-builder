@@ -1,7 +1,5 @@
 'use client';
 
-import { QuestionType } from '@repo/form-ui/enums/question';
-
 import {
   ChevronsUpDown,
   Edit2Icon,
@@ -10,7 +8,11 @@ import {
   TrashIcon,
 } from 'lucide-react';
 
+import { QuestionType } from '@repo/form-ui/enums/question';
+
 import { IForm } from '@repo/form-ui/types/form';
+
+import QuestionEditDialog from '@/components/question-edit-dialog';
 
 import { Badge } from '@repo/core-ui/components/badge';
 import { Button } from '@repo/core-ui/components/button';
@@ -64,7 +66,9 @@ const FormNew = () => {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-sm font-medium dark:text-gray-100">{section.title}</h3>
+                    <h3 className="text-sm font-medium dark:text-gray-100">
+                      {section.title}
+                    </h3>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
                       {section.description}
                     </p>
@@ -151,9 +155,15 @@ const FormNew = () => {
                             <Button variant="ghost" size="sm">
                               Delete
                             </Button>
-                            <Button variant="ghost" size="sm">
-                              Edit
-                            </Button>
+                            <QuestionEditDialog
+                              form={sampleForm as IForm}
+                              question={field}
+                              triggerComponent={
+                                <Button variant="ghost" size="sm">
+                                  Edit
+                                </Button>
+                              }
+                            />
                           </div>
                         </div>
                       </div>
