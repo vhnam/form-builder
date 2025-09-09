@@ -1,8 +1,7 @@
 'use client';
 
 import {
-  Cell,
-  Row,
+  type CellContext,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
@@ -14,7 +13,7 @@ import { useCallback, useMemo } from 'react';
 import { PRIVATE_ROUTES } from '@/constants/routes';
 
 import { format } from '@repo/core-ui/lib/day';
-import { sortBy } from '@repo/core-ui/lib/lodash';
+import { sortBy, sumBy } from '@repo/core-ui/lib/lodash';
 
 import useDeleteForm from '@/hooks/use-delete-form';
 
@@ -36,11 +35,6 @@ import {
 } from '@repo/core-ui/components/table';
 
 import { recentForms } from '@/mocks/forms';
-
-interface FormCellProps<T> {
-  cell: Cell<T, string>;
-  row: Row<T>;
-}
 
 const FormList = () => {
   const router = useRouter();
@@ -72,11 +66,24 @@ const FormList = () => {
     [openDeleteFormDialog]
   );
 
+  const fieldsCountCache = useMemo(() => new Map<string, number>(), []);
+
+  const getFieldsCount = useCallback(
+    (form: IForm) => {
+      if (!fieldsCountCache.has(form.id)) {
+        const count = sumBy(form.sections, (section) => section.fields.length);
+        fieldsCountCache.set(form.id, count);
+      }
+      return fieldsCountCache.get(form.id)!;
+    },
+    [fieldsCountCache]
+  );
+
   const columns = useMemo(
     () => [
       {
         header: 'Form',
-        cell: ({ row }: FormCellProps<IForm>) => (
+        cell: ({ row }: CellContext<IForm, string>) => (
           <>
             <span className="block truncate font-medium">
               {row.original.title}
@@ -89,31 +96,27 @@ const FormList = () => {
       },
       {
         header: 'Statistics',
-        cell: ({ row }: FormCellProps<IForm>) => (
+        cell: ({ row }: CellContext<IForm, string>) => (
           <>
             <Badge variant="secondary" className="mx-1">
               {row.original.sections.length} sections
             </Badge>
             <Badge variant="secondary" className="mx-1">
-              {row.original.sections.reduce(
-                (acc, section) => acc + section.fields.length,
-                0
-              )}{' '}
-              questions
+              {getFieldsCount(row.original)} questions
             </Badge>
           </>
         ),
       },
       {
         header: 'Created at',
-        cell: ({ row }: FormCellProps<IForm>) => {
+        cell: ({ row }: CellContext<IForm, string>) => {
           const date = new Date(row.original.createdAt);
           return <span className="text-sm">{format(date, 'MMM d, yyyy')}</span>;
         },
       },
       {
         header: ' ',
-        cell: ({ row }: FormCellProps<IForm>) => (
+        cell: ({ row }: CellContext<IForm, string>) => (
           <FormContextMenu
             form={row.original}
             onPreview={handlePreviewForm}
@@ -124,7 +127,13 @@ const FormList = () => {
         ),
       },
     ],
-    [handleEditForm, handleDuplicateForm, handleDeleteForm, handlePreviewForm]
+    [
+      handleEditForm,
+      handleDuplicateForm,
+      handleDeleteForm,
+      handlePreviewForm,
+      getFieldsCount,
+    ]
   );
 
   const sortedData = useMemo(
