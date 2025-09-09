@@ -21,7 +21,6 @@ export const getVisiblePages = (
   const lastPage = totalPages - 1;
   const leftBoundary = maxVisible - 2;
   const rightBoundary = totalPages - (maxVisible - 2);
-  const sidePages = Math.floor((maxVisible - 3) / 2);
 
   if (currentPageIndex < leftBoundary) {
     return [
@@ -43,6 +42,7 @@ export const getVisiblePages = (
     ];
   }
 
+  const sidePages = Math.floor((maxVisible - 3) / 2);
   const startMiddle = Math.max(firstPage + 1, currentPageIndex - sidePages);
   const endMiddle = Math.min(lastPage - 1, currentPageIndex + sidePages);
 
