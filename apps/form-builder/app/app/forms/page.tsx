@@ -1,4 +1,4 @@
-import FormList from '@/modules/form-list/form-list';
+import FormList from '@/modules/form-list';
 
 const FormListPage = () => {
   return <FormList />;

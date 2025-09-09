@@ -1,35 +1,259 @@
 'use client';
 
+import {
+  Cell,
+  Row,
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable,
+} from '@tanstack/react-table';
+import { useRouter } from 'next/navigation';
+import { useCallback, useMemo } from 'react';
+
+import { PRIVATE_ROUTES } from '@/constants/routes';
+
+import { format } from '@repo/core-ui/lib/day';
+import { sortBy } from '@repo/core-ui/lib/lodash';
+import { cn } from '@repo/core-ui/lib/utils';
+
 import useDeleteForm from '@/hooks/use-delete-form';
 
+import { type IForm } from '@repo/form-ui/types/form';
+
+import FormContextMenu from '@/components/form-context-menu';
 import FormDeleteDialog from '@/components/form-delete-dialog';
 
-import FormItem from './form-item';
+import { Badge } from '@repo/core-ui/components/badge';
+import { Input } from '@repo/core-ui/components/input';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@repo/core-ui/components/pagination';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@repo/core-ui/components/table';
 
 import { recentForms } from '@/mocks/forms';
 
+interface FormCellProps<T> {
+  cell: Cell<T, string>;
+  row: Row<T>;
+}
+
 const FormList = () => {
+  const router = useRouter();
   const { isOpen, closeDeleteFormDialog, onDeleteForm, openDeleteFormDialog } =
     useDeleteForm();
+
+  const handleEditForm = useCallback(
+    (form: IForm) => {
+      router.push(PRIVATE_ROUTES.forms.edit.replace('[id]', form.id));
+    },
+    [router]
+  );
+
+  const handleDuplicateForm = useCallback((form: IForm) => {
+    console.log(form);
+  }, []);
+
+  const handleDeleteForm = useCallback(
+    (form: IForm) => {
+      openDeleteFormDialog(form);
+    },
+    [openDeleteFormDialog]
+  );
+
+  const columns = useMemo(
+    () => [
+      {
+        header: 'Form',
+        cell: ({ row }: FormCellProps<IForm>) => (
+          <>
+            <span className="block truncate font-medium">
+              {row.original.title}
+            </span>
+            <span className="text-muted-foreground block truncate text-sm">
+              {row.original.description}
+            </span>
+          </>
+        ),
+      },
+      {
+        header: 'Statistics',
+        cell: ({ row }: FormCellProps<IForm>) => (
+          <>
+            <Badge variant="secondary" className="mx-1">
+              {row.original.sections.length} sections
+            </Badge>
+            <Badge variant="secondary" className="mx-1">
+              {row.original.sections.reduce(
+                (acc, section) => acc + section.fields.length,
+                0
+              )}{' '}
+              questions
+            </Badge>
+          </>
+        ),
+      },
+      {
+        header: 'Created at',
+        cell: ({ row }: FormCellProps<IForm>) => {
+          const date = new Date(row.original.createdAt);
+          return (
+            <span className="text-sm">{format(date, 'MMM dd, yyyy')}</span>
+          );
+        },
+      },
+      {
+        header: ' ',
+        cell: ({ row }: FormCellProps<IForm>) => (
+          <FormContextMenu
+            form={row.original}
+            onEdit={handleEditForm}
+            onDuplicate={handleDuplicateForm}
+            onDelete={handleDeleteForm}
+          />
+        ),
+      },
+    ],
+    [handleEditForm, handleDuplicateForm, handleDeleteForm]
+  );
+
+  const sortedData = useMemo(
+    () => sortBy(recentForms, 'updatedAt').reverse(),
+    []
+  );
+
+  const table = useReactTable({
+    data: sortedData,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    initialState: {
+      pagination: {
+        pageSize: 10,
+      },
+    },
+  });
 
   return (
     <>
       <div className="flex flex-1">
         <div className="flex-1 p-6">
-          <div className="bg-card text-card-foreground rounded-lg border border-gray-200">
-            <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-700">
-              <h3 className="font-display text-lg font-semibold text-gray-900 dark:text-gray-100">
-                Forms
-              </h3>
+          <div className="space-y-4">
+            <h3 className="font-display text-lg font-semibold text-gray-900 dark:text-gray-100">
+              Forms
+            </h3>
+            <div className="flex items-center justify-between">
+              <Input
+                placeholder="Filter..."
+                // value={(table.getColumn("name_4603829743")?.getFilterValue() as string) ?? ""}
+                // onChange={(event) =>
+                //   table.getColumn("name_4603829743")?.setFilterValue(event.target.value)
+                // }
+                className="max-w-sm"
+              />
+              <div className="flex items-center gap-4"></div>
             </div>
-            <div className="divide-y divide-gray-200 dark:divide-gray-700">
-              {recentForms.map((form) => (
-                <FormItem
-                  key={form.id}
-                  form={form}
-                  onDelete={openDeleteFormDialog}
-                />
-              ))}
+            <div className="rounded-md border">
+              <Table>
+                <TableHeader>
+                  {table.getHeaderGroups().map((headerGroup) => (
+                    <TableRow key={headerGroup.id}>
+                      {headerGroup.headers.map((header) => (
+                        <TableHead key={header.id}>
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                        </TableHead>
+                      ))}
+                    </TableRow>
+                  ))}
+                </TableHeader>
+
+                <TableBody>
+                  {table.getRowModel().rows?.length ? (
+                    table.getRowModel().rows.map((row) => (
+                      <TableRow
+                        key={row.id}
+                        data-state={row.getIsSelected() && 'selected'}
+                      >
+                        {row.getVisibleCells().map((cell) => (
+                          <TableCell key={cell.id}>
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell
+                        colSpan={columns.length}
+                        className="h-24 text-center"
+                      >
+                        No results.
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
+
+            <div className="flex items-center justify-end space-x-2 py-4">
+              <Pagination>
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious
+                      onClick={() => table.previousPage()}
+                      isActive={table.getCanPreviousPage()}
+                      className={cn({
+                        'text-muted-foreground pointer-events-none cursor-default hover:bg-transparent':
+                          !table.getCanPreviousPage(),
+                      })}
+                    />
+                  </PaginationItem>
+                  {Array.from({ length: table.getPageCount() }).map(
+                    (_, index) => (
+                      <PaginationItem key={index}>
+                        <PaginationLink
+                          onClick={() => table.setPageIndex(index)}
+                          isActive={
+                            index === table.getState().pagination.pageIndex
+                          }
+                        >
+                          {index + 1}
+                        </PaginationLink>
+                      </PaginationItem>
+                    )
+                  )}
+                  <PaginationItem>
+                    <PaginationNext
+                      onClick={() => table.nextPage()}
+                      isActive={table.getCanNextPage()}
+                      className={cn({
+                        'text-muted-foreground pointer-events-none cursor-default hover:bg-transparent':
+                          !table.getCanNextPage(),
+                      })}
+                    />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
             </div>
           </div>
         </div>

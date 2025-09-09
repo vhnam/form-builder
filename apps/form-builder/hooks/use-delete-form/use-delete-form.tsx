@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { type IForm } from '@repo/form-ui/types/form';
 
@@ -8,23 +8,21 @@ const useDeleteForm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formToDelete, setFormToDelete] = useState<string | null>(null);
 
-  const openDeleteFormDialog = (form: IForm) => {
+  const openDeleteFormDialog = useCallback((form: IForm) => {
     setFormToDelete(form.id);
     setIsOpen(true);
-  };
+  }, []);
 
-  const closeDeleteFormDialog = () => {
+  const closeDeleteFormDialog = useCallback(() => {
     setIsOpen(false);
     setFormToDelete(null);
-  };
+  }, []);
 
-  const handleDeleteForm = () => {
+  const handleDeleteForm = useCallback(() => {
     if (formToDelete) {
-      // TODO: Implement actual delete logic here
-      console.log('Deleting form:', formToDelete);
       closeDeleteFormDialog();
     }
-  };
+  }, [formToDelete, closeDeleteFormDialog]);
 
   return {
     isOpen,
