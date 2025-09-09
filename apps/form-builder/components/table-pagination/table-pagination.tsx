@@ -1,5 +1,5 @@
 import { Table } from '@tanstack/react-table';
-import { MouseEvent } from 'react';
+import { MouseEvent, useCallback } from 'react';
 
 import { cn, getVisiblePages } from '@repo/core-ui/lib/utils';
 
@@ -24,17 +24,40 @@ const TABLE_DISABLED_PAGINATION_ITEM_CLASSNAME =
  * The navigation is handled by the table state, not actual URL routing.
  */
 const TablePagination = <T,>({ table }: TablePaginationProps<T>) => {
+  const handlePreviousPage = useCallback(
+    (e: MouseEvent<HTMLAnchorElement>) => {
+      e.stopPropagation();
+      if (table.getCanPreviousPage()) {
+        table.previousPage();
+      }
+    },
+    [table]
+  );
+
+  const handleNextPage = useCallback(
+    (e: MouseEvent<HTMLAnchorElement>) => {
+      e.stopPropagation();
+      if (table.getCanNextPage()) {
+        table.nextPage();
+      }
+    },
+    [table]
+  );
+
+  const handlePageClick = useCallback(
+    (pageItem: number) => (e: MouseEvent<HTMLAnchorElement>) => {
+      e.stopPropagation();
+      table.setPageIndex(pageItem);
+    },
+    [table]
+  );
+
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            onClick={(e: MouseEvent<HTMLAnchorElement>) => {
-              e.stopPropagation();
-              if (table.getCanPreviousPage()) {
-                table.previousPage();
-              }
-            }}
+            onClick={handlePreviousPage}
             className={cn({
               [TABLE_DISABLED_PAGINATION_ITEM_CLASSNAME]:
                 !table.getCanPreviousPage(),
@@ -50,10 +73,7 @@ const TablePagination = <T,>({ table }: TablePaginationProps<T>) => {
               <PaginationEllipsis />
             ) : (
               <PaginationLink
-                onClick={(e: MouseEvent<HTMLAnchorElement>) => {
-                  e.stopPropagation();
-                  table.setPageIndex(pageItem);
-                }}
+                onClick={handlePageClick(pageItem)}
                 isActive={pageItem === table.getState().pagination.pageIndex}
               >
                 {pageItem + 1}
@@ -63,12 +83,7 @@ const TablePagination = <T,>({ table }: TablePaginationProps<T>) => {
         ))}
         <PaginationItem>
           <PaginationNext
-            onClick={(e: MouseEvent<HTMLAnchorElement>) => {
-              e.stopPropagation();
-              if (table.getCanNextPage()) {
-                table.nextPage();
-              }
-            }}
+            onClick={handleNextPage}
             className={cn({
               [TABLE_DISABLED_PAGINATION_ITEM_CLASSNAME]:
                 !table.getCanNextPage(),

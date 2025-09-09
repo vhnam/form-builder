@@ -1,29 +1,20 @@
 'use client';
 
 import {
-  type CellContext,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 
-import { PRIVATE_ROUTES } from '@/constants/routes';
-
-import { format } from '@repo/core-ui/lib/day';
 import { sortBy, sumBy } from '@repo/core-ui/lib/lodash';
-
-import useDeleteForm from '@/hooks/use-delete-form';
 
 import { type IForm } from '@repo/form-ui/types/form';
 
-import FormContextMenu from '@/components/form-context-menu';
 import FormDeleteDialog from '@/components/form-delete-dialog';
 import TablePagination from '@/components/table-pagination';
 
-import { Badge } from '@repo/core-ui/components/badge';
 import { Input } from '@repo/core-ui/components/input';
 import {
   Table,
@@ -34,11 +25,12 @@ import {
   TableRow,
 } from '@repo/core-ui/components/table';
 
+import { useFormListColumns } from './form-list-columns';
+import { useFormListActions } from './form-list.actions';
+
 import { recentForms } from '@/mocks/forms';
 
 const FormList = () => {
-  const router = useRouter();
-
   // TODO: update later with real data
   const fieldsCountMap = useMemo(() => {
     const map = new Map<string, number>();
@@ -51,100 +43,15 @@ const FormList = () => {
     return map;
   }, []);
 
-  const { isOpen, closeDeleteFormDialog, onDeleteForm, openDeleteFormDialog } =
-    useDeleteForm();
-
-  const handleEditForm = useCallback(
-    (form: IForm) => {
-      router.push(PRIVATE_ROUTES.forms.edit.replace('[id]', form.id));
-    },
-    [router]
-  );
-
-  const handleDuplicateForm = useCallback((form: IForm) => {
-    console.log(form);
-  }, []);
-
-  const handlePreviewForm = useCallback(
-    (form: IForm) => {
-      router.push(PRIVATE_ROUTES.forms.preview.replace('[id]', form.id));
-    },
-    [router]
-  );
-
-  const handleDeleteForm = useCallback(
-    (form: IForm) => {
-      openDeleteFormDialog(form);
-    },
-    [openDeleteFormDialog]
-  );
-
   const getFieldsCount = useCallback(
     (form: IForm) => fieldsCountMap.get(form.id) ?? 0,
     [fieldsCountMap]
   );
 
-  const columns = useMemo(
-    () => [
-      {
-        id: 'form',
-        header: 'Form',
-        cell: ({ row }: CellContext<IForm, string>) => (
-          <>
-            <span className="block truncate font-medium">
-              {row.original.title}
-            </span>
-            <span className="text-muted-foreground block truncate text-sm">
-              {row.original.description}
-            </span>
-          </>
-        ),
-      },
-      {
-        id: 'statistics',
-        header: 'Statistics',
-        cell: ({ row }: CellContext<IForm, string>) => (
-          <>
-            <Badge variant="secondary" className="mx-1">
-              {row.original.sections.length} sections
-            </Badge>
-            <Badge variant="secondary" className="mx-1">
-              {getFieldsCount(row.original)} questions
-            </Badge>
-          </>
-        ),
-      },
-      {
-        id: 'createdAt',
-        header: 'Created at',
-        cell: ({ row }: CellContext<IForm, string>) => {
-          const date = new Date(row.original.createdAt);
-          return <span className="text-sm">{format(date, 'MMM d, yyyy')}</span>;
-        },
-      },
-      {
-        id: 'actions',
-        header: 'Actions',
-        cell: ({ row }: CellContext<IForm, string>) => (
-          <FormContextMenu
-            form={row.original}
-            onPreview={handlePreviewForm}
-            onEdit={handleEditForm}
-            onDuplicate={handleDuplicateForm}
-            onDelete={handleDeleteForm}
-          />
-        ),
-      },
-    ],
-    [
-      handleEditForm,
-      handleDuplicateForm,
-      handleDeleteForm,
-      handlePreviewForm,
-      getFieldsCount,
-    ]
-  );
+  const { handlers, deleteDialog } = useFormListActions();
+  const columns = useFormListColumns({ handlers, getFieldsCount });
 
+  // TODO: update later with real data
   const sortedData = useMemo(
     () => sortBy(recentForms, 'updatedAt').reverse(),
     []
@@ -170,9 +77,9 @@ const FormList = () => {
             <h3 className="font-display text-lg font-semibold text-gray-900 dark:text-gray-100">
               Forms
             </h3>
+            {/* TODO: add filter and sort for Input later */}
             <div className="flex items-center justify-between">
               <Input placeholder="Filter..." className="max-w-sm" />
-              <div className="flex items-center gap-4"></div>
             </div>
             <div className="rounded-md border">
               <Table>
@@ -196,10 +103,7 @@ const FormList = () => {
                 <TableBody>
                   {table.getRowModel().rows?.length ? (
                     table.getRowModel().rows.map((row) => (
-                      <TableRow
-                        key={row.id}
-                        data-state={row.getIsSelected() && 'selected'}
-                      >
+                      <TableRow key={row.id}>
                         {row.getVisibleCells().map((cell) => (
                           <TableCell key={cell.id}>
                             {flexRender(
@@ -232,9 +136,9 @@ const FormList = () => {
       </div>
 
       <FormDeleteDialog
-        isOpen={isOpen}
-        onClose={closeDeleteFormDialog}
-        onDeleteForm={onDeleteForm}
+        isOpen={deleteDialog.isOpen}
+        onClose={deleteDialog.closeDeleteFormDialog}
+        onDeleteForm={deleteDialog.onDeleteForm}
       />
     </>
   );
