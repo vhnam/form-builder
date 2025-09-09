@@ -1,6 +1,6 @@
 ---
-description: "Monorepo configuration and project structure rules"
-globs: ["**/*"]
+description: 'Monorepo configuration and project structure rules'
+globs: ['**/*']
 alwaysApply: true
 ---
 
@@ -22,11 +22,11 @@ This is a TypeScript monorepo using pnpm workspaces with the following structure
 - **form-ui** (`packages/form-ui`): Form-specific UI components (React)
 - **eslint-config** (`packages/eslint-config`): Shared ESLint configurations
 - **typescript-config** (`packages/typescript-config`): Shared TypeScript configurations
+- **prettier-config** (`packages/prettier-config`): Shared Prettier configuration
 
 ## Dependencies
-- `form-builder` depends on: `form-ui`, `core-ui`
-- `docs` depends on: `core-ui`
-- `form-ui` depends on: `core-ui`
+- `form-builder` depends on: `@repo/form-ui`, `@repo/core-ui`
+- `form-ui` depends on: `@repo/core-ui`
 - `core-ui` has no internal dependencies
 
 ## Development Guidelines

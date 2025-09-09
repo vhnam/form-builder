@@ -1,22 +1,32 @@
 ---
-description: "Form builder application specific rules"
-globs: ["apps/form-builder/**/*"]
+description: 'Form builder application specific rules'
+globs: ['apps/form-builder/**/*']
 alwaysApply: true
 ---
 
 # Form Builder Application
 
-This is the main form builder application built with Next.js.
+This is the main form builder application built with Next.js. It provides a drag-and-drop interface for creating dynamic forms with various field types, conditional logic, and real-time preview capabilities.
 
 ## Technology Stack
-- **Framework**: Next.js 14+ with App Router
+
+- **Framework**: Next.js 15 with App Router
 - **Language**: TypeScript (strict mode)
-- **Styling**: CSS Modules
-- **Dependencies**: 
-  - `form-ui` - Form components
-  - `core-ui` - Design system components
+- **Styling**: TailwindCSS v4
+- **Dependencies**:
+  - `@repo/form-ui` - Form-specific UI components and logic
+  - `@repo/core-ui` - Design system and reusable UI components
+
+## Application Structure
+
+- **Authentication**: Sign-in, sign-up, and forgot password flows
+- **Dashboard**: Form management and overview
+- **Form Builder**: Drag-and-drop form creation interface
+- **Form Editor**: Edit existing forms with question management
+- **Form Preview**: Real-time preview of forms being built
 
 ## Development Guidelines
+
 - Use App Router patterns (`app/` directory)
 - Follow Next.js best practices for server/client components
 - Import components from `@repo/form-ui` and `@repo/core-ui`
@@ -24,11 +34,19 @@ This is the main form builder application built with Next.js.
 - Follow the established file structure:
   - `app/` - Next.js app router pages and layouts
   - `components/` - Application-specific components
-  - `lib/` - Utility functions and configurations
-  - `types/` - TypeScript type definitions
+  - `modules/` - Feature-based modules (auth, dashboard, form-edit, etc.)
+  - `layouts/` - Layout components (auth, private)
+  - `hooks/` - Custom React hooks
+  - `services/` - API services and mutations
+  - `schemas/` - Form validation schemas
+  - `constants/` - Application constants
+  - `mocks/` - Mock data for development
 
 ## Code Style
+
 - Use functional components with hooks
 - Prefer server components when possible
 - Use proper TypeScript types for all props and state
 - Follow the monorepo's ESLint configuration
+- Organize code by feature in the `modules/` directory
+- Use consistent naming conventions for components and files

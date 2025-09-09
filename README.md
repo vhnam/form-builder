@@ -1,6 +1,6 @@
-# Form Builder Monorepo
+# Loki Form Builder
 
-A modern form builder application built with Next.js and TypeScript, organized as a Turborepo monorepo.
+A modern, drag-and-drop form builder application built with Next.js and TypeScript, organized as a Turborepo monorepo. Create dynamic forms with various field types, conditional logic, and real-time preview capabilities.
 
 ## What's inside?
 
@@ -8,8 +8,7 @@ This Turborepo includes the following packages/apps:
 
 ### Applications
 
-- **`form-builder`**: Main form builder application built with Next.js 15
-- **`docs`**: Documentation site built with Next.js 15
+- **`form-builder`**: Main form builder application built with Next.js 14+ with App Router
 
 ### Packages
 
@@ -17,8 +16,19 @@ This Turborepo includes the following packages/apps:
 - **`@repo/form-ui`**: Form-specific UI components and logic (depends on core-ui)
 - **`@repo/eslint-config`**: Shared ESLint configurations
 - **`@repo/typescript-config`**: Shared TypeScript configurations
+- **`@repo/prettier-config`**: Shared Prettier configuration
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/) with strict mode enabled.
+
+## Features
+
+- **Drag & Drop Form Builder**: Intuitive interface for creating forms
+- **Multiple Field Types**: Text, email, select, checkbox, date, and textarea fields
+- **Conditional Logic**: Create dynamic forms with conditional field visibility
+- **Real-time Preview**: See your form as you build it
+- **Form Management**: Create, edit, delete, and organize your forms
+- **Authentication**: Secure user authentication and authorization
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
 
 ## Technology Stack
 
@@ -27,7 +37,7 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/) with stri
 - **Package Manager**: pnpm 9.0.0
 - **Build Tool**: Turborepo 2.5.6
 - **Styling**: CSS Modules
-- **Linting**: ESLint 9.34.0
+- **Linting**: ESLint
 - **Formatting**: Prettier 3.6.2
 
 ## Getting Started
@@ -42,6 +52,16 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/) with stri
 ```sh
 # Install dependencies
 pnpm install
+```
+
+### Quick Start
+
+```sh
+# Start the development server
+pnpm dev
+
+# Open your browser to http://localhost:3000
+# Start building forms!
 ```
 
 ## Development
@@ -59,9 +79,6 @@ To build a specific package:
 ```sh
 # Build form-builder app
 pnpm build --filter=form-builder
-
-# Build docs app
-pnpm build --filter=docs
 
 # Build core-ui package
 pnpm build --filter=@repo/core-ui
@@ -83,9 +100,6 @@ To start a specific app:
 ```sh
 # Start form-builder app (runs on http://localhost:3000)
 pnpm dev --filter=form-builder
-
-# Start docs app (runs on http://localhost:3001)
-pnpm dev --filter=docs
 ```
 
 ### Linting and Type Checking
@@ -104,15 +118,15 @@ pnpm format
 ## Project Structure
 
 ```
-form-builder/
+loki-form/
 ├── apps/
-│   ├── form-builder/          # Main form builder application
-│   └── docs/                  # Documentation site
+│   └── form-builder/          # Main form builder application
 ├── packages/
 │   ├── core-ui/              # Design system components
-│   ├── form-ui/      # Form-specific components
+│   ├── form-ui/              # Form-specific components
 │   ├── eslint-config/        # Shared ESLint configs
-│   └── typescript-config/    # Shared TypeScript configs
+│   ├── typescript-config/    # Shared TypeScript configs
+│   └── prettier-config/      # Shared Prettier config
 ├── package.json              # Root package.json
 ├── pnpm-workspace.yaml       # pnpm workspace config
 └── turbo.json               # Turborepo config
@@ -121,7 +135,6 @@ form-builder/
 ## Package Dependencies
 
 - **form-builder** → `@repo/core-ui`, `@repo/form-ui`
-- **docs** → `@repo/core-ui`
 - **form-ui** → `@repo/core-ui`
 - **core-ui** → (no internal dependencies)
 

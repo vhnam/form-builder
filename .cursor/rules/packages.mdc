@@ -1,6 +1,6 @@
 ---
-description: "Shared packages development rules"
-globs: ["packages/**/*"]
+description: 'Shared packages development rules'
+globs: ['packages/**/*']
 alwaysApply: true
 ---
 
@@ -20,7 +20,7 @@ This directory contains shared packages used across the monorepo.
 - **Purpose**: Form-specific UI components and logic
 - **Framework**: React
 - **Type**: Library
-- **Dependencies**: `core-ui`
+- **Dependencies**: `@repo/core-ui`
 
 ### ESLint Config (`packages/eslint-config`)
 - **Purpose**: Shared ESLint configurations
@@ -29,6 +29,11 @@ This directory contains shared packages used across the monorepo.
 
 ### TypeScript Config (`packages/typescript-config`)
 - **Purpose**: Shared TypeScript configurations
+- **Type**: Configuration package
+- **Dependencies**: None
+
+### Prettier Config (`packages/prettier-config`)
+- **Purpose**: Shared Prettier configuration
 - **Type**: Configuration package
 - **Dependencies**: None
 
