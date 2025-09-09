@@ -28,10 +28,6 @@ const Profile = () => {
     <div className="flex flex-1">
       <div className="flex-1 p-6">
         <div className="space-y-6">
-          <h3 className="font-display text-2xl font-semibold text-gray-900 dark:text-gray-100">
-            Profile
-          </h3>
-
           <Card>
             <CardHeader>
               <CardTitle>Profile</CardTitle>

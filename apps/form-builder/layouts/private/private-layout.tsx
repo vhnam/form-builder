@@ -5,7 +5,6 @@ import { type PropsWithChildren } from 'react';
 import {
   SidebarInset,
   SidebarProvider,
-  SidebarTrigger,
 } from '@repo/core-ui/components/sidebar';
 
 import AppSidebar from './app-sidebar';
@@ -14,12 +13,7 @@ const PrivateLayout = ({ children }: PropsWithChildren) => {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>
-        <header className="bg-background sticky top-0 flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <SidebarTrigger />
-        </header>
-        {children}
-      </SidebarInset>
+      <SidebarInset>{children}</SidebarInset>
     </SidebarProvider>
   );
 };

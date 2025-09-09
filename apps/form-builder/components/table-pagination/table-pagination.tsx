@@ -53,7 +53,7 @@ const TablePagination = <T,>({ table }: TablePaginationProps<T>) => {
   );
 
   return (
-    <Pagination>
+    <Pagination className="justify-end">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious

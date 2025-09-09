@@ -6,7 +6,10 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import Link from 'next/link';
 import { useCallback, useMemo } from 'react';
+
+import { PRIVATE_ROUTES } from '@/constants/routes';
 
 import { sortBy, sumBy } from '@repo/core-ui/lib/lodash';
 
@@ -15,6 +18,7 @@ import { type IForm } from '@repo/form-ui/types/form';
 import FormDeleteDialog from '@/components/form-delete-dialog';
 import TablePagination from '@/components/table-pagination';
 
+import { Button } from '@repo/core-ui/components/button';
 import { Input } from '@repo/core-ui/components/input';
 import {
   Table,
@@ -24,6 +28,8 @@ import {
   TableHeader,
   TableRow,
 } from '@repo/core-ui/components/table';
+
+import { PrivateLayoutHeader } from '@/layouts/private';
 
 import { useFormListColumns } from './form-list-columns';
 import { useFormListActions } from './form-list.actions';
@@ -71,12 +77,18 @@ const FormList = () => {
 
   return (
     <>
+      <PrivateLayoutHeader
+        title="Forms"
+        actions={
+          <Link href={PRIVATE_ROUTES.forms.new}>
+            <Button variant="default">New</Button>
+          </Link>
+        }
+      />
+
       <div className="flex flex-1">
         <div className="flex-1 p-6">
           <div className="space-y-6">
-            <h3 className="font-display text-2xl font-semibold text-gray-900 dark:text-gray-100">
-              Forms
-            </h3>
             {/* TODO: add filter and sort for Input later */}
             <div className="flex items-center justify-between">
               <Input placeholder="Filter..." className="max-w-sm" />
@@ -128,7 +140,7 @@ const FormList = () => {
               </Table>
             </div>
 
-            <div className="flex items-center justify-end space-x-2 py-4">
+            <div className="flex items-center justify-between space-x-2 py-4">
               <TablePagination table={table} />
             </div>
           </div>
