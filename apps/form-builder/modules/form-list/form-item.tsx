@@ -4,7 +4,10 @@ import { useMemo } from 'react';
 
 import { PRIVATE_ROUTES } from '@/constants/routes';
 
-import type { IForm, ISection } from '@repo/form-ui/types/form';
+import { format } from '@repo/core-ui/lib/day';
+import { sumBy } from '@repo/core-ui/lib/lodash';
+
+import type { IForm } from '@repo/form-ui/types/form';
 
 import FormContextMenu from '@/components/form-context-menu';
 
@@ -17,10 +20,7 @@ const FormItem = ({ form, onDelete }: FormItemProps) => {
   const router = useRouter();
 
   const numberOfQuestions = useMemo(() => {
-    return form.sections.reduce(
-      (acc, section: ISection) => acc + section.fields.length,
-      0
-    );
+    return sumBy(form.sections, (section) => section.fields.length);
   }, [form]);
 
   const handleDeleteForm = (form: IForm) => {
@@ -40,11 +40,7 @@ const FormItem = ({ form, onDelete }: FormItemProps) => {
   };
 
   const formatDate = (dateString: number) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    });
+    return format(new Date(dateString), 'MMM d, yyyy');
   };
 
   return (
