@@ -5,46 +5,56 @@ export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
 };
 
-export const getVisiblePages = (currentPageIndex: number, totalPages: number) => {
-  const maxVisible = 5;
+export const getVisiblePages = (
+  currentPageIndex: number,
+  totalPages: number,
+  maxVisible: number = 5
+): Array<number | 'ellipsis'> => {
   const pages: Array<number | 'ellipsis'> = [];
 
+  if (totalPages <= 0) return pages;
+
   if (totalPages <= maxVisible) {
-    for (let index = 0; index < totalPages; index++) {
-      pages.push(index);
-    }
-    return pages;
+    return Array.from({ length: totalPages }, (_, index) => index);
   }
 
-  const sidePages = Math.floor((maxVisible - 1) / 2);
-  let startPage = Math.max(0, currentPageIndex - sidePages);
-  let endPage = Math.min(totalPages - 1, currentPageIndex + sidePages);
+  const firstPage = 0;
+  const lastPage = totalPages - 1;
+  const leftBoundary = maxVisible - 2;
+  const rightBoundary = totalPages - (maxVisible - 2);
+  const sidePages = Math.floor((maxVisible - 3) / 2);
 
-  if (endPage - startPage < maxVisible - 1) {
-    if (startPage === 0) {
-      endPage = Math.min(totalPages - 1, startPage + maxVisible - 1);
-    } else if (endPage === totalPages - 1) {
-      startPage = Math.max(0, endPage - maxVisible + 1);
-    }
+  if (currentPageIndex < leftBoundary) {
+    return [
+      ...Array.from({ length: leftBoundary }, (_, index) => index),
+      'ellipsis',
+      lastPage,
+    ];
   }
 
-  if (startPage > 0) {
-    pages.push(0);
-    if (startPage > 1) {
-      pages.push('ellipsis');
-    }
+  if (currentPageIndex >= rightBoundary) {
+    const start = totalPages - (maxVisible - 1);
+    return [
+      firstPage,
+      'ellipsis',
+      ...Array.from(
+        { length: totalPages - start },
+        (_, index) => start + index
+      ),
+    ];
   }
 
-  for (let index = startPage; index <= endPage; index++) {
-    pages.push(index);
-  }
+  const startMiddle = Math.max(firstPage + 1, currentPageIndex - sidePages);
+  const endMiddle = Math.min(lastPage - 1, currentPageIndex + sidePages);
 
-  if (endPage < totalPages - 1) {
-    if (endPage < totalPages - 2) {
-      pages.push('ellipsis');
-    }
-    pages.push(totalPages - 1);
-  }
-
-  return pages;
+  return [
+    firstPage,
+    'ellipsis',
+    ...Array.from(
+      { length: endMiddle - startMiddle + 1 },
+      (_, index) => startMiddle + index
+    ),
+    'ellipsis',
+    lastPage,
+  ];
 };
