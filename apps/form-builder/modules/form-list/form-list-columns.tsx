@@ -1,5 +1,5 @@
 import { type CellContext } from '@tanstack/react-table';
-import { useMemo } from 'react';
+import { ReactNode, useMemo } from 'react';
 
 import { format } from '@repo/core-ui/lib/day';
 
@@ -37,7 +37,7 @@ export const useFormListColumns = ({
       {
         id: 'form',
         header: 'Form',
-        cell: ({ row }: CellContext<IForm, string>) => (
+        cell: ({ row }: CellContext<IForm, ReactNode>) => (
           <>
             <span className="block truncate font-medium">
               {row.original.title}
@@ -51,7 +51,7 @@ export const useFormListColumns = ({
       {
         id: 'statistics',
         header: 'Statistics',
-        cell: ({ row }: CellContext<IForm, string>) => (
+        cell: ({ row }: CellContext<IForm, ReactNode>) => (
           <>
             <Badge variant="secondary" className="mx-1">
               {row.original.sections.length} sections
@@ -65,7 +65,7 @@ export const useFormListColumns = ({
       {
         id: 'createdAt',
         header: 'Created at',
-        cell: ({ row }: CellContext<IForm, string>) => {
+        cell: ({ row }: CellContext<IForm, ReactNode>) => {
           const date = new Date(row.original.createdAt);
           return <span className="text-sm">{format(date, 'MMM d, yyyy')}</span>;
         },
@@ -73,7 +73,7 @@ export const useFormListColumns = ({
       {
         id: 'actions',
         header: 'Actions',
-        cell: ({ row }: CellContext<IForm, string>) => (
+        cell: ({ row }: CellContext<IForm, ReactNode>) => (
           <FormContextMenu
             form={row.original}
             onPreview={handlePreviewForm}

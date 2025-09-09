@@ -31,7 +31,7 @@ export const getVisiblePages = (
   }
 
   if (currentPageIndex >= rightBoundary) {
-    const start = totalPages - (maxVisible - 1);
+    const start = Math.max(firstPage + 1, totalPages - (maxVisible - 2));
     return [
       firstPage,
       'ellipsis',

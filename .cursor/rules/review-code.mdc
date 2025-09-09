@@ -1,0 +1,21 @@
+---
+description: Review code
+globs: ['**/*']
+alwaysApply: true
+---
+
+# Code Review Guidelines
+
+## Primary Focus Areas
+
+- Review this code diff as a senior developer
+- Look for bugs, clear logic errors, and code quality problems
+- Flag significant security concerns (leaked credentials, SQL injection, etc.)
+- Flag significant performance concerns (memory leaks, deadlocks, long-lived requests)
+
+## What NOT to Flag
+
+- Minor security concerns that don't pose real risk
+- Minor performance concerns that don't impact user experience
+- Style preferences that don't affect functionality
+- Overly pedantic suggestions
