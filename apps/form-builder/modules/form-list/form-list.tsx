@@ -8,7 +8,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useRouter } from 'next/navigation';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 
 import { PRIVATE_ROUTES } from '@/constants/routes';
 
@@ -38,6 +38,9 @@ import { recentForms } from '@/mocks/forms';
 
 const FormList = () => {
   const router = useRouter();
+
+  const fieldsCountCache = useRef(new Map<string, number>());
+
   const { isOpen, closeDeleteFormDialog, onDeleteForm, openDeleteFormDialog } =
     useDeleteForm();
 
@@ -66,15 +69,13 @@ const FormList = () => {
     [openDeleteFormDialog]
   );
 
-  const fieldsCountCache = useMemo(() => new Map<string, number>(), []);
-
   const getFieldsCount = useCallback(
     (form: IForm) => {
-      if (!fieldsCountCache.has(form.id)) {
+      if (!fieldsCountCache.current.has(form.id)) {
         const count = sumBy(form.sections, (section) => section.fields.length);
-        fieldsCountCache.set(form.id, count);
+        fieldsCountCache.current.set(form.id, count);
       }
-      return fieldsCountCache.get(form.id)!;
+      return fieldsCountCache.current.get(form.id)!;
     },
     [fieldsCountCache]
   );
@@ -115,7 +116,7 @@ const FormList = () => {
         },
       },
       {
-        header: ' ',
+        header: 'Actions',
         cell: ({ row }: CellContext<IForm, string>) => (
           <FormContextMenu
             form={row.original}

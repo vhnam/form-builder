@@ -28,7 +28,7 @@ const TablePagination = <T,>({ table }: TablePaginationProps<T>) => {
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            onClick={() => table.previousPage()}
+            onClick={() => table.getCanPreviousPage() && table.previousPage()}
             className={cn({
               [TABLE_DISABLED_PAGINATION_ITEM_CLASSNAME]:
                 !table.getCanPreviousPage(),
@@ -54,7 +54,7 @@ const TablePagination = <T,>({ table }: TablePaginationProps<T>) => {
         ))}
         <PaginationItem>
           <PaginationNext
-            onClick={() => table.nextPage()}
+            onClick={() => table.getCanNextPage() && table.nextPage()}
             className={cn({
               [TABLE_DISABLED_PAGINATION_ITEM_CLASSNAME]:
                 !table.getCanNextPage(),
