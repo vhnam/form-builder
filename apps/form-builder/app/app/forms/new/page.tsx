@@ -1,5 +1,3 @@
-'use client';
-
 import FormNew from '@/modules/form-new';
 
 const NewFormPage = () => {

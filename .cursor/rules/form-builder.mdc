@@ -12,7 +12,7 @@ This is the main form builder application built with Next.js. It provides a drag
 
 - **Framework**: Next.js 15 with App Router
 - **Language**: TypeScript (strict mode)
-- **Styling**: TailwindCSS v4
+- **Styling**: TailwindCSS v4, Shadcn UI
 - **Dependencies**:
   - `@repo/form-ui` - Form-specific UI components and logic
   - `@repo/core-ui` - Design system and reusable UI components

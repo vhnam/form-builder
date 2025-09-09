@@ -36,7 +36,7 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/) with stri
 - **Language**: TypeScript 5.9 (strict mode)
 - **Package Manager**: pnpm 9.0.0
 - **Build Tool**: Turborepo 2.5.6
-- **Styling**: CSS Modules
+- **Styling**: TailwindCSS v4, Shadcn UI
 - **Linting**: ESLint
 - **Formatting**: Prettier 3.6.2
 

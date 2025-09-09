@@ -1,6 +1,6 @@
 'use client';
 
-import useDeleteForm from '@/hooks/useDeleteForm';
+import useDeleteForm from '@/hooks/use-delete-form';
 
 import FormDeleteDialog from '@/components/form-delete-dialog';
 
