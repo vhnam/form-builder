@@ -3,6 +3,9 @@ name: Code Review
 on:
   pull_request:
     types: [opened, reopened, ready_for_review]
+  push:
+    branches:
+      - main
 
 jobs:
   review:
