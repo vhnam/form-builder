@@ -1,6 +1,7 @@
 import {
   CopyIcon,
   Edit3Icon,
+  EyeIcon,
   MoreHorizontalIcon,
   Trash2Icon,
 } from 'lucide-react';
@@ -17,6 +18,7 @@ import {
 
 interface FormContextMenuProps {
   form: IForm;
+  onPreview?: (form: IForm) => void;
   onEdit: (form: IForm) => void;
   onDuplicate: (form: IForm) => void;
   onDelete: (form: IForm) => void;
@@ -24,6 +26,7 @@ interface FormContextMenuProps {
 
 const FormContextMenu = ({
   form,
+  onPreview,
   onEdit,
   onDuplicate,
   onDelete,
@@ -36,6 +39,17 @@ const FormContextMenu = ({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
+        {onPreview && (
+          <DropdownMenuItem
+            onClick={(e) => {
+              e.stopPropagation();
+              onPreview(form);
+            }}
+          >
+            <EyeIcon className="mr-2 size-4" />
+            Preview
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem
           onClick={(e) => {
             e.stopPropagation();

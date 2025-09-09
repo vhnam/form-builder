@@ -36,9 +36,7 @@ export const getVisiblePages = (currentPage: number, totalPages: number) => {
   }
 
   for (let index = startPage; index <= endPage; index++) {
-    if (index !== 0 || startPage === 0) {
-      pages.push(index);
-    }
+    pages.push(index);
   }
 
   if (endPage < totalPages - 1) {

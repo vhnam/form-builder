@@ -58,6 +58,13 @@ const FormList = () => {
     console.log(form);
   }, []);
 
+  const handlePreviewForm = useCallback(
+    (form: IForm) => {
+      router.push(PRIVATE_ROUTES.forms.preview.replace('[id]', form.id));
+    },
+    [router]
+  );
+
   const handleDeleteForm = useCallback(
     (form: IForm) => {
       openDeleteFormDialog(form);
@@ -101,9 +108,7 @@ const FormList = () => {
         header: 'Created at',
         cell: ({ row }: FormCellProps<IForm>) => {
           const date = new Date(row.original.createdAt);
-          return (
-            <span className="text-sm">{format(date, 'MMM dd, yyyy')}</span>
-          );
+          return <span className="text-sm">{format(date, 'MMM d, yyyy')}</span>;
         },
       },
       {
@@ -111,6 +116,7 @@ const FormList = () => {
         cell: ({ row }: FormCellProps<IForm>) => (
           <FormContextMenu
             form={row.original}
+            onPreview={handlePreviewForm}
             onEdit={handleEditForm}
             onDuplicate={handleDuplicateForm}
             onDelete={handleDeleteForm}
@@ -118,7 +124,7 @@ const FormList = () => {
         ),
       },
     ],
-    [handleEditForm, handleDuplicateForm, handleDeleteForm]
+    [handleEditForm, handleDuplicateForm, handleDeleteForm, handlePreviewForm]
   );
 
   const sortedData = useMemo(

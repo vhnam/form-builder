@@ -3,6 +3,8 @@ import { useRouter } from 'next/navigation';
 
 import { PRIVATE_ROUTES } from '@/constants/routes';
 
+import { format } from '@repo/core-ui/lib/day';
+
 import { type IForm } from '@repo/form-ui/types/form';
 
 import FormContextMenu from '@/components/form-context-menu';
@@ -29,29 +31,26 @@ const RecentItem = ({ form, onDelete }: RecentItemProps) => {
     console.log(form);
   };
 
-  const handleSelectForm = (form: IForm) => {
+  const handlePreviewForm = (form: IForm) => {
     router.push(PRIVATE_ROUTES.forms.preview.replace('[id]', form.id));
   };
 
   const formatDate = (dateString: number) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    });
+    return format(new Date(dateString), 'MMM d, yyyy');
   };
 
   return (
     <Card
       key={form.id}
       className="group cursor-pointer transition-shadow hover:shadow-md"
-      onClick={() => handleSelectForm(form)}
+      onClick={() => handlePreviewForm(form)}
     >
       <CardContent className="p-4">
         <div className="mb-3 flex items-start justify-between">
           <FileTextIcon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
           <FormContextMenu
             form={form}
+            onPreview={handlePreviewForm}
             onEdit={handleEditForm}
             onDuplicate={handleDuplicateForm}
             onDelete={handleDeleteForm}
