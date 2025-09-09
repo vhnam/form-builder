@@ -23,7 +23,7 @@ export const useFormListActions = () => {
     console.log(form);
   }, []);
 
-  const handlePreviewForm = useCallback(
+  const handleSelectForm = useCallback(
     (form: IForm) => {
       router.push(PRIVATE_ROUTES.forms.preview.replace('[id]', form.id));
     },
@@ -41,7 +41,7 @@ export const useFormListActions = () => {
     handlers: {
       handleEditForm,
       handleDuplicateForm,
-      handlePreviewForm,
+      handleSelectForm,
       handleDeleteForm,
     },
     deleteDialog: {

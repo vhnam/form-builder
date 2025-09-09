@@ -18,7 +18,7 @@ import {
 
 interface FormContextMenuProps {
   form: IForm;
-  onPreview?: (form: IForm) => void;
+  onSelect?: (form: IForm) => void;
   onEdit: (form: IForm) => void;
   onDuplicate: (form: IForm) => void;
   onDelete: (form: IForm) => void;
@@ -26,7 +26,7 @@ interface FormContextMenuProps {
 
 const FormContextMenu = ({
   form,
-  onPreview,
+  onSelect,
   onEdit,
   onDuplicate,
   onDelete,
@@ -39,11 +39,11 @@ const FormContextMenu = ({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {onPreview && (
+        {onSelect && (
           <DropdownMenuItem
             onClick={(e) => {
               e.stopPropagation();
-              onPreview(form);
+              onSelect(form);
             }}
           >
             <EyeIcon className="mr-2 size-4" />

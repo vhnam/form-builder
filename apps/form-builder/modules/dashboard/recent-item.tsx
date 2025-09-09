@@ -31,7 +31,7 @@ const RecentItem = ({ form, onDelete }: RecentItemProps) => {
     console.log(form);
   };
 
-  const handlePreviewForm = (form: IForm) => {
+  const handleSelectForm = (form: IForm) => {
     router.push(PRIVATE_ROUTES.forms.preview.replace('[id]', form.id));
   };
 
@@ -43,14 +43,14 @@ const RecentItem = ({ form, onDelete }: RecentItemProps) => {
     <Card
       key={form.id}
       className="group cursor-pointer transition-shadow hover:shadow-md"
-      onClick={() => handlePreviewForm(form)}
+      onClick={() => handleSelectForm(form)}
     >
       <CardContent className="p-4">
         <div className="mb-3 flex items-start justify-between">
           <FileTextIcon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
           <FormContextMenu
             form={form}
-            onPreview={handlePreviewForm}
+            onPreview={handleSelectForm}
             onEdit={handleEditForm}
             onDuplicate={handleDuplicateForm}
             onDelete={handleDeleteForm}

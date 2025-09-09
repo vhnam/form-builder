@@ -12,7 +12,7 @@ import { Badge } from '@repo/core-ui/components/badge';
 interface FormHandlers {
   handleEditForm: (form: IForm) => void;
   handleDuplicateForm: (form: IForm) => void;
-  handlePreviewForm: (form: IForm) => void;
+  handleSelectForm: (form: IForm) => void;
   handleDeleteForm: (form: IForm) => void;
 }
 
@@ -28,7 +28,7 @@ export const useFormListColumns = ({
   const {
     handleEditForm,
     handleDuplicateForm,
-    handlePreviewForm,
+    handleSelectForm,
     handleDeleteForm,
   } = handlers;
 
@@ -76,7 +76,7 @@ export const useFormListColumns = ({
         cell: ({ row }: CellContext<IForm, ReactNode>) => (
           <FormContextMenu
             form={row.original}
-            onPreview={handlePreviewForm}
+            onSelect={handleSelectForm}
             onEdit={handleEditForm}
             onDuplicate={handleDuplicateForm}
             onDelete={handleDeleteForm}
@@ -88,7 +88,7 @@ export const useFormListColumns = ({
       handleEditForm,
       handleDuplicateForm,
       handleDeleteForm,
-      handlePreviewForm,
+      handleSelectForm,
       getFieldsCount,
     ]
   );
