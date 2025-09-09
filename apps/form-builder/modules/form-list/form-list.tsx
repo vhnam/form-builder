@@ -83,6 +83,7 @@ const FormList = () => {
   const columns = useMemo(
     () => [
       {
+        id: 'form',
         header: 'Form',
         cell: ({ row }: CellContext<IForm, string>) => (
           <>
@@ -96,6 +97,7 @@ const FormList = () => {
         ),
       },
       {
+        id: 'statistics',
         header: 'Statistics',
         cell: ({ row }: CellContext<IForm, string>) => (
           <>
@@ -109,6 +111,7 @@ const FormList = () => {
         ),
       },
       {
+        id: 'createdAt',
         header: 'Created at',
         cell: ({ row }: CellContext<IForm, string>) => {
           const date = new Date(row.original.createdAt);
@@ -116,6 +119,7 @@ const FormList = () => {
         },
       },
       {
+        id: 'actions',
         header: 'Actions',
         cell: ({ row }: CellContext<IForm, string>) => (
           <FormContextMenu

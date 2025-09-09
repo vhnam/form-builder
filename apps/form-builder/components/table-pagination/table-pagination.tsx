@@ -28,7 +28,12 @@ const TablePagination = <T,>({ table }: TablePaginationProps<T>) => {
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            onClick={() => table.getCanPreviousPage() && table.previousPage()}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (table.getCanPreviousPage()) {
+                table.previousPage();
+              }
+            }}
             className={cn({
               [TABLE_DISABLED_PAGINATION_ITEM_CLASSNAME]:
                 !table.getCanPreviousPage(),
@@ -44,7 +49,10 @@ const TablePagination = <T,>({ table }: TablePaginationProps<T>) => {
               <PaginationEllipsis />
             ) : (
               <PaginationLink
-                onClick={() => table.setPageIndex(pageItem)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  table.setPageIndex(pageItem);
+                }}
                 isActive={pageItem === table.getState().pagination.pageIndex}
               >
                 {pageItem + 1}
@@ -54,7 +62,12 @@ const TablePagination = <T,>({ table }: TablePaginationProps<T>) => {
         ))}
         <PaginationItem>
           <PaginationNext
-            onClick={() => table.getCanNextPage() && table.nextPage()}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (table.getCanNextPage()) {
+                table.nextPage();
+              }
+            }}
             className={cn({
               [TABLE_DISABLED_PAGINATION_ITEM_CLASSNAME]:
                 !table.getCanNextPage(),

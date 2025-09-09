@@ -5,7 +5,7 @@ export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
 };
 
-export const getVisiblePages = (currentPage: number, totalPages: number) => {
+export const getVisiblePages = (currentPageIndex: number, totalPages: number) => {
   const maxVisible = 5;
   const pages: Array<number | 'ellipsis'> = [];
 
@@ -17,8 +17,8 @@ export const getVisiblePages = (currentPage: number, totalPages: number) => {
   }
 
   const sidePages = Math.floor((maxVisible - 1) / 2);
-  let startPage = Math.max(0, currentPage - sidePages);
-  let endPage = Math.min(totalPages - 1, currentPage + sidePages);
+  let startPage = Math.max(0, currentPageIndex - sidePages);
+  let endPage = Math.min(totalPages - 1, currentPageIndex + sidePages);
 
   if (endPage - startPage < maxVisible - 1) {
     if (startPage === 0) {
