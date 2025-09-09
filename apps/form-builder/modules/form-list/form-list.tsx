@@ -15,7 +15,6 @@ import { PRIVATE_ROUTES } from '@/constants/routes';
 
 import { format } from '@repo/core-ui/lib/day';
 import { sortBy } from '@repo/core-ui/lib/lodash';
-import { cn } from '@repo/core-ui/lib/utils';
 
 import useDeleteForm from '@/hooks/use-delete-form';
 
@@ -23,17 +22,10 @@ import { type IForm } from '@repo/form-ui/types/form';
 
 import FormContextMenu from '@/components/form-context-menu';
 import FormDeleteDialog from '@/components/form-delete-dialog';
+import TablePagination from '@/components/table-pagination';
 
 import { Badge } from '@repo/core-ui/components/badge';
 import { Input } from '@repo/core-ui/components/input';
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from '@repo/core-ui/components/pagination';
 import {
   Table,
   TableBody,
@@ -155,14 +147,7 @@ const FormList = () => {
               Forms
             </h3>
             <div className="flex items-center justify-between">
-              <Input
-                placeholder="Filter..."
-                // value={(table.getColumn("name_4603829743")?.getFilterValue() as string) ?? ""}
-                // onChange={(event) =>
-                //   table.getColumn("name_4603829743")?.setFilterValue(event.target.value)
-                // }
-                className="max-w-sm"
-              />
+              <Input placeholder="Filter..." className="max-w-sm" />
               <div className="flex items-center gap-4"></div>
             </div>
             <div className="rounded-md border">
@@ -216,44 +201,7 @@ const FormList = () => {
             </div>
 
             <div className="flex items-center justify-end space-x-2 py-4">
-              <Pagination>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious
-                      onClick={() => table.previousPage()}
-                      isActive={table.getCanPreviousPage()}
-                      className={cn({
-                        'text-muted-foreground pointer-events-none cursor-default hover:bg-transparent':
-                          !table.getCanPreviousPage(),
-                      })}
-                    />
-                  </PaginationItem>
-                  {Array.from({ length: table.getPageCount() }).map(
-                    (_, index) => (
-                      <PaginationItem key={index}>
-                        <PaginationLink
-                          onClick={() => table.setPageIndex(index)}
-                          isActive={
-                            index === table.getState().pagination.pageIndex
-                          }
-                        >
-                          {index + 1}
-                        </PaginationLink>
-                      </PaginationItem>
-                    )
-                  )}
-                  <PaginationItem>
-                    <PaginationNext
-                      onClick={() => table.nextPage()}
-                      isActive={table.getCanNextPage()}
-                      className={cn({
-                        'text-muted-foreground pointer-events-none cursor-default hover:bg-transparent':
-                          !table.getCanNextPage(),
-                      })}
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
+              <TablePagination table={table} />
             </div>
           </div>
         </div>

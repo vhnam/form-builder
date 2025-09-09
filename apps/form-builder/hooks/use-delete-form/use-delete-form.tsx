@@ -20,6 +20,8 @@ const useDeleteForm = () => {
 
   const handleDeleteForm = useCallback(() => {
     if (formToDelete) {
+      // TODO: Implement actual delete logic here
+      console.log('Deleting form:', formToDelete);
       closeDeleteFormDialog();
     }
   }, [formToDelete, closeDeleteFormDialog]);
