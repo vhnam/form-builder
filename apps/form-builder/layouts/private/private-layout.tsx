@@ -2,9 +2,6 @@
 
 import { type PropsWithChildren } from 'react';
 
-import { useClientOnly } from '@repo/core-ui/hooks/use-client-only';
-
-import { ModeToggle } from '@repo/core-ui/components/mode-toggle';
 import {
   SidebarInset,
   SidebarProvider,
@@ -14,8 +11,6 @@ import {
 import AppSidebar from './app-sidebar';
 
 const PrivateLayout = ({ children }: PropsWithChildren) => {
-  const hasMounted = useClientOnly();
-
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -24,11 +19,6 @@ const PrivateLayout = ({ children }: PropsWithChildren) => {
           <SidebarTrigger />
         </header>
         {children}
-        {hasMounted && (
-          <div className="z-99 fixed right-3 top-3 isolate">
-            <ModeToggle />
-          </div>
-        )}
       </SidebarInset>
     </SidebarProvider>
   );

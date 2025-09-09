@@ -1,6 +1,10 @@
 'use client';
 
 import { BadgeCheckIcon, ChevronsUpDown, LogOutIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
+
+import { PRIVATE_ROUTES } from '@/constants/routes';
 
 import { useClientOnly } from '@repo/core-ui/hooks/use-client-only';
 
@@ -36,6 +40,11 @@ interface NavUserProps {
 const NavUser = ({ user }: NavUserProps) => {
   const { isMobile } = useSidebar();
   const hasMounted = useClientOnly();
+  const router = useRouter();
+
+  const handleProfileClick = useCallback(() => {
+    router.push(PRIVATE_ROUTES.profile);
+  }, [router]);
 
   if (!hasMounted) {
     return (
@@ -97,7 +106,7 @@ const NavUser = ({ user }: NavUserProps) => {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={handleProfileClick}>
                 <BadgeCheckIcon />
                 Account
               </DropdownMenuItem>

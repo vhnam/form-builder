@@ -73,8 +73,8 @@ const FormList = () => {
     <>
       <div className="flex flex-1">
         <div className="flex-1 p-6">
-          <div className="space-y-4">
-            <h3 className="font-display text-lg font-semibold text-gray-900 dark:text-gray-100">
+          <div className="space-y-6">
+            <h3 className="font-display text-2xl font-semibold text-gray-900 dark:text-gray-100">
               Forms
             </h3>
             {/* TODO: add filter and sort for Input later */}

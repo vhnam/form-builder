@@ -6,6 +6,7 @@ export const PRIVATE_ROUTES = {
     edit: '/app/forms/[id]',
     preview: '/app/forms/[id]/preview',
   },
+  profile: '/app/me',
 };
 
 export const PUBLIC_ROUTES = {
