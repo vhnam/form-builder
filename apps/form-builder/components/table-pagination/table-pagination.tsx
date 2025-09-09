@@ -1,4 +1,5 @@
 import { Table } from '@tanstack/react-table';
+import { MouseEvent } from 'react';
 
 import { cn, getVisiblePages } from '@repo/core-ui/lib/utils';
 
@@ -28,7 +29,7 @@ const TablePagination = <T,>({ table }: TablePaginationProps<T>) => {
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            onClick={(e) => {
+            onClick={(e: MouseEvent<HTMLAnchorElement>) => {
               e.stopPropagation();
               if (table.getCanPreviousPage()) {
                 table.previousPage();
@@ -49,7 +50,7 @@ const TablePagination = <T,>({ table }: TablePaginationProps<T>) => {
               <PaginationEllipsis />
             ) : (
               <PaginationLink
-                onClick={(e) => {
+                onClick={(e: MouseEvent<HTMLAnchorElement>) => {
                   e.stopPropagation();
                   table.setPageIndex(pageItem);
                 }}
@@ -62,7 +63,7 @@ const TablePagination = <T,>({ table }: TablePaginationProps<T>) => {
         ))}
         <PaginationItem>
           <PaginationNext
-            onClick={(e) => {
+            onClick={(e: MouseEvent<HTMLAnchorElement>) => {
               e.stopPropagation();
               if (table.getCanNextPage()) {
                 table.nextPage();

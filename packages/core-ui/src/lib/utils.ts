@@ -10,9 +10,8 @@ export const getVisiblePages = (
   totalPages: number,
   maxVisible: number = 5
 ): Array<number | 'ellipsis'> => {
-  const pages: Array<number | 'ellipsis'> = [];
-
-  if (totalPages <= 0) return pages;
+  if (totalPages <= 0 || !Number.isInteger(totalPages)) return [];
+  if (currentPageIndex < 0 || currentPageIndex >= totalPages) return [];
 
   if (totalPages <= maxVisible) {
     return Array.from({ length: totalPages }, (_, index) => index);
