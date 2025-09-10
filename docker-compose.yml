@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17.5-alpine
+    container_name: loki_form_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: loki_form
+      POSTGRES_PASSWORD: loki_form
+      POSTGRES_DB: loki_form
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
