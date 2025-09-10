@@ -8,12 +8,14 @@ This Turborepo includes the following packages/apps:
 
 ### Applications
 
-- **`form-builder`**: Main form builder application built with Next.js 14+ with App Router
+- **`form-builder`**: Main form builder application built with Next.js 15 with App Router
+- **`form-builder-server`**: NestJS API server for form builder backend services
 
 ### Packages
 
 - **`@repo/core-ui`**: Design system and reusable UI components (React library)
 - **`@repo/form-ui`**: Form-specific UI components and logic (depends on core-ui)
+- **`api-spec`**: TypeSpec API specification and OpenAPI documentation
 - **`@repo/eslint-config`**: Shared ESLint configurations
 - **`@repo/typescript-config`**: Shared TypeScript configurations
 - **`@repo/prettier-config`**: Shared Prettier configuration
@@ -32,13 +34,25 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/) with stri
 
 ## Technology Stack
 
+### Frontend
 - **Framework**: Next.js 15 with App Router
 - **Language**: TypeScript 5.9 (strict mode)
+- **Styling**: TailwindCSS v4
+- **State Management**: React Query (TanStack Query)
+- **Forms**: React Hook Form with Zod validation
+- **UI Components**: Custom design system with Shadcn UI
+
+### Backend
+- **Framework**: NestJS
+- **Database**: PostgreSQL with Drizzle ORM
+- **API Documentation**: TypeSpec with OpenAPI 3.0
+
+### Development Tools
 - **Package Manager**: pnpm 9.0.0
 - **Build Tool**: Turborepo 2.5.6
-- **Styling**: TailwindCSS v4, Shadcn UI
 - **Linting**: ESLint
 - **Formatting**: Prettier 3.6.2
+- **Testing**: Vitest (form-ui), Jest (server)
 
 ## Getting Started
 
@@ -57,8 +71,15 @@ pnpm install
 ### Quick Start
 
 ```sh
-# Start the development server
+# Start all development servers (frontend + backend)
 pnpm dev
+
+# Or start specific services:
+# Frontend only (runs on http://localhost:3000)
+pnpm dev --filter=form-builder
+
+# Backend only (runs on http://localhost:4000)
+pnpm dev --filter=form-builder-server
 
 # Open your browser to http://localhost:3000
 # Start building forms!
@@ -100,6 +121,9 @@ To start a specific app:
 ```sh
 # Start form-builder app (runs on http://localhost:3000)
 pnpm dev --filter=form-builder
+
+# Start form-builder-server (runs on http://localhost:4000)
+pnpm dev --filter=form-builder-server
 ```
 
 ### Linting and Type Checking
@@ -120,23 +144,53 @@ pnpm format
 ```
 loki-form/
 ├── apps/
-│   └── form-builder/          # Main form builder application
+│   ├── form-builder/          # Main form builder application (Next.js)
+│   └── form-builder-server/   # Backend API server (NestJS)
 ├── packages/
 │   ├── core-ui/              # Design system components
 │   ├── form-ui/              # Form-specific components
+│   ├── api-spec/             # TypeSpec API specification
 │   ├── eslint-config/        # Shared ESLint configs
 │   ├── typescript-config/    # Shared TypeScript configs
 │   └── prettier-config/      # Shared Prettier config
 ├── package.json              # Root package.json
 ├── pnpm-workspace.yaml       # pnpm workspace config
-└── turbo.json               # Turborepo config
+└── turbo.json                # Turborepo config
 ```
 
 ## Package Dependencies
 
 - **form-builder** → `@repo/core-ui`, `@repo/form-ui`
+- **form-builder-server** → (standalone NestJS application)
 - **form-ui** → `@repo/core-ui`
 - **core-ui** → (no internal dependencies)
+- **api-spec** → (standalone TypeSpec specification)
+
+## API Documentation
+
+The project includes a TypeSpec API specification that generates OpenAPI documentation:
+
+```sh
+# Generate API documentation
+pnpm --filter=api-spec preview
+
+# View documentation at http://localhost:1234
+```
+
+## Database Setup
+
+The backend uses PostgreSQL with Drizzle ORM:
+
+```sh
+# Generate database migrations
+pnpm --filter=form-builder-server db:generate
+
+# Run migrations
+pnpm --filter=form-builder-server db:migrate
+
+# Open Drizzle Studio (database GUI)
+pnpm --filter=form-builder-server db:studio
+```
 
 ## Remote Caching
 
@@ -161,7 +215,24 @@ npx turbo link
 
 ## Useful Links
 
+### Core Technologies
 - [Turborepo Documentation](https://turborepo.com/docs)
 - [Next.js Documentation](https://nextjs.org/docs)
+- [NestJS Documentation](https://docs.nestjs.com/)
 - [pnpm Documentation](https://pnpm.io/)
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+
+### UI & Styling
+- [TailwindCSS Documentation](https://tailwindcss.com/docs)
+- [Shadcn UI Documentation](https://ui.shadcn.com/)
+- [React Hook Form Documentation](https://react-hook-form.com/)
+
+### Database & API
+- [Drizzle ORM Documentation](https://orm.drizzle.team/)
+- [TypeSpec Documentation](https://typespec.io/docs/)
+- [PostgreSQL Documentation](https://www.postgresql.org/docs/)
+
+### Development Tools
+- [React Query Documentation](https://tanstack.com/query/latest)
+- [Zod Documentation](https://zod.dev/)
+- [Vitest Documentation](https://vitest.dev/)
