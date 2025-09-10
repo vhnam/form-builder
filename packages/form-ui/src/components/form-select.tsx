@@ -2,7 +2,12 @@
 
 import { useId } from 'react';
 
-import type { IField, ISelectAttributes } from '@repo/form-ui/types/form';
+import { type IField } from '@repo/form-ui/types/form';
+
+import { selectFieldAttributesSchema } from '@repo/form-ui/schemas/select';
+import { type ISelectAttributes } from '@repo/form-ui/schemas/select';
+
+import { getFieldAttributes } from '@repo/form-ui/utils/field';
 
 import { Label } from '@repo/core-ui/components/label';
 import {
@@ -15,8 +20,16 @@ import {
 
 const FormSelect = (field: IField) => {
   const id = field.id ?? useId();
-  const { options, placeholder, defaultValue } =
-    field.attributes as ISelectAttributes;
+  const attributes = getFieldAttributes<ISelectAttributes>(
+    selectFieldAttributesSchema,
+    field
+  );
+
+  if (!attributes) {
+    return null;
+  }
+
+  const { placeholder, defaultValue, options } = attributes.data;
 
   return (
     <div className="grid w-full items-center gap-2">

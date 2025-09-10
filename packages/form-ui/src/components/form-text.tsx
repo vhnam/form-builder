@@ -1,14 +1,29 @@
 import { useId } from 'react';
 
-import type { IField, ITextFieldAttributes } from '@repo/form-ui/types/form';
+import { type IField } from '@repo/form-ui/types/form';
+
+import {
+  type ITextFieldAttributes,
+  textFieldAttributesSchema,
+} from '@repo/form-ui/schemas/text';
+
+import { getFieldAttributes } from '@repo/form-ui/utils/field';
 
 import { Input } from '@repo/core-ui/components/input';
 import { Label } from '@repo/core-ui/components/label';
 
-const FormText = (field: IField) => {
+const FormText = (field: IField<ITextFieldAttributes>) => {
   const id = field.id ?? useId();
-  const { placeholder, defaultValue } =
-    field.attributes as ITextFieldAttributes;
+  const attributes = getFieldAttributes<ITextFieldAttributes>(
+    textFieldAttributesSchema,
+    field
+  );
+
+  if (!attributes) {
+    return null;
+  }
+
+  const { placeholder, defaultValue } = attributes.data;
 
   return (
     <div className="grid w-full items-center gap-2">

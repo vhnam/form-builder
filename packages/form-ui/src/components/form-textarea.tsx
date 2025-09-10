@@ -1,14 +1,29 @@
 import { useId } from 'react';
 
-import type { IField, ITextareaAttributes } from '@repo/form-ui/types/form';
+import type { IField } from '@repo/form-ui/types/form';
+
+import {
+  type ITextareaAttributes,
+  textareaFieldAttributesSchema,
+} from '@repo/form-ui/schemas/textarea';
+
+import { getFieldAttributes } from '@repo/form-ui/utils/field';
 
 import { Label } from '@repo/core-ui/components/label';
 import { Textarea } from '@repo/core-ui/components/textarea';
 
 const FormTextarea = (field: IField) => {
   const id = field.id ?? useId();
-  const { placeholder, defaultValue, rows } =
-    field.attributes as ITextareaAttributes;
+  const attributes = getFieldAttributes<ITextareaAttributes>(
+    textareaFieldAttributesSchema,
+    field
+  );
+
+  if (!attributes) {
+    return null;
+  }
+
+  const { placeholder, defaultValue, rows } = attributes.data;
 
   return (
     <div className="grid w-full gap-2">

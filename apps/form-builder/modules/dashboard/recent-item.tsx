@@ -50,7 +50,7 @@ const RecentItem = ({ form, onDelete }: RecentItemProps) => {
           <FileTextIcon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
           <FormContextMenu
             form={form}
-            onPreview={handleSelectForm}
+            onSelect={handleSelectForm}
             onEdit={handleEditForm}
             onDuplicate={handleDuplicateForm}
             onDelete={handleDeleteForm}

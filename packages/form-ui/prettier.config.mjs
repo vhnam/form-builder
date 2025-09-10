@@ -10,6 +10,7 @@ export default {
         importOrder: [
           '^(?!@repo)@?\\w',
           '^@repo/form-ui/types(.*)$',
+          '^@repo/form-ui/schemas(.*)$',
           '^@repo/core-ui/lib(.*)$',
           '^@repo/form-ui/utils(.*)$',
           '^@repo/core-ui/hooks(.*)$',

@@ -22,10 +22,7 @@ const QuestionInputSettings = ({ question }: QuestionInputSettingsProps) => {
       <div className="grid grid-cols-2 gap-3">
         <div className="grid gap-3">
           <Label htmlFor={`${question.id}-placeholder`}>Placeholder</Label>
-          <Input
-            id={`${question.id}-placeholder`}
-            defaultValue={question.placeholder}
-          />
+          <Input id={`${question.id}-placeholder`} />
         </div>
 
         <div className="grid gap-3">

@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  type ColumnDef,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
@@ -63,9 +64,9 @@ const FormList = () => {
     []
   );
 
-  const table = useReactTable({
+  const table = useReactTable<IForm>({
     data: sortedData,
-    columns,
+    columns: columns as ColumnDef<IForm>[],
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {

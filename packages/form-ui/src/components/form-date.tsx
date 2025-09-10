@@ -2,13 +2,27 @@
 
 import { useId } from 'react';
 
-import { IDateAttributes, type IField } from '@repo/form-ui/types/form';
+import { type IField } from '@repo/form-ui/types/form';
 
-import DatePicker from '@repo/core-ui/components/date-picker';
+import { dateFieldAttributesSchema } from '@repo/form-ui/schemas/date';
+import { type IDateAttributes } from '@repo/form-ui/schemas/date';
+
+import { getFieldAttributes } from '@repo/form-ui/utils/field';
+
+import { DatePicker } from '@repo/core-ui/components/date-picker';
 import { Label } from '@repo/core-ui/components/label';
 
 const FormDate = (field: IField) => {
   const id = field.id ?? useId();
+  const attributes = getFieldAttributes<IDateAttributes>(
+    dateFieldAttributesSchema,
+    field
+  );
+
+  if (!attributes) {
+    return null;
+  }
+
   const {
     placeholder,
     defaultValue,
@@ -16,7 +30,7 @@ const FormDate = (field: IField) => {
     beforeDate,
     afterDate,
     mode = 'single',
-  } = field.attributes as IDateAttributes;
+  } = attributes.data;
 
   const getDisabledDates = () => {
     const disabled = [];
