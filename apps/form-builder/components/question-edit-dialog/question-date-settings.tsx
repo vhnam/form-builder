@@ -1,7 +1,7 @@
 import { type IField } from '@repo/form-ui/types/form';
 
 import { Checkbox } from '@repo/core-ui/components/checkbox';
-import DatePicker from '@repo/core-ui/components/date-picker';
+import { DatePicker } from '@repo/core-ui/components/date-picker';
 import { Input } from '@repo/core-ui/components/input';
 import { Label } from '@repo/core-ui/components/label';
 import {
@@ -52,10 +52,7 @@ const QuestionDateSettings = ({ question }: QuestionDateSettingsProps) => {
       <div className="grid grid-cols-2 gap-3">
         <div className="grid gap-3">
           <Label htmlFor={`${question.id}-placeholder`}>Placeholder</Label>
-          <Input
-            id={`${question.id}-placeholder`}
-            defaultValue={question.placeholder}
-          />
+          <Input id={`${question.id}-placeholder`} />
         </div>
 
         <div className="grid gap-3">

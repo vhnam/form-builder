@@ -72,15 +72,17 @@ export const useFormListColumns = ({
       },
       {
         id: 'actions',
-        header: 'Actions',
+        header: <span className="flex items-center justify-end">Actions</span>,
         cell: ({ row }: CellContext<IForm, ReactNode>) => (
-          <FormContextMenu
-            form={row.original}
-            onSelect={handleSelectForm}
-            onEdit={handleEditForm}
-            onDuplicate={handleDuplicateForm}
-            onDelete={handleDeleteForm}
-          />
+          <div className="flex items-center justify-end">
+            <FormContextMenu
+              form={row.original}
+              onSelect={handleSelectForm}
+              onEdit={handleEditForm}
+              onDuplicate={handleDuplicateForm}
+              onDelete={handleDeleteForm}
+            />
+          </div>
         ),
       },
     ],

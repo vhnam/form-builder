@@ -4,6 +4,11 @@ import { useId } from 'react';
 
 import { type IField } from '@repo/form-ui/types/form';
 
+import { selectFieldAttributesSchema } from '@repo/form-ui/schemas/select';
+import { type ISelectAttributes } from '@repo/form-ui/schemas/select';
+
+import { getFieldAttributes } from '@repo/form-ui/utils/field';
+
 import { Label } from '@repo/core-ui/components/label';
 import {
   Select,
@@ -13,26 +18,38 @@ import {
   SelectValue,
 } from '@repo/core-ui/components/select';
 
-const FormEmail = (field: IField) => {
-  const id = useId();
+const FormSelect = (field: IField) => {
+  const id = field.id ?? useId();
+  const attributes = getFieldAttributes<ISelectAttributes>(
+    selectFieldAttributesSchema,
+    field
+  );
+
+  if (!attributes) {
+    return null;
+  }
+
+  const { placeholder, defaultValue, options } = attributes.data;
 
   return (
     <div className="grid w-full items-center gap-2">
       <Label className="text-sm font-medium" htmlFor={id}>
         {field.label}
       </Label>
-      <Select>
+      <Select defaultValue={defaultValue}>
         <SelectTrigger className="w-full">
-          <SelectValue id={id} placeholder="Theme" />
+          <SelectValue id={id} placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="light">Light</SelectItem>
-          <SelectItem value="dark">Dark</SelectItem>
-          <SelectItem value="system">System</SelectItem>
+          {options.map((option) => (
+            <SelectItem key={option} value={option}>
+              {option}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </div>
   );
 };
 
-export default FormEmail;
+export default FormSelect;

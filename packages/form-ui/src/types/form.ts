@@ -1,21 +1,17 @@
-export interface ISection {
-  id: string;
-  title: string;
-  description: string;
-  fields: IField[];
-  order: number;
-  showInfo: boolean;
-}
+import { type ICheckboxAttributes } from '@repo/form-ui/schemas/checkbox';
+import { type IDateAttributes } from '@repo/form-ui/schemas/date';
+import { type IEmailAttributes } from '@repo/form-ui/schemas/email';
+import { type ISelectAttributes } from '@repo/form-ui/schemas/select';
+import { type ITextFieldAttributes } from '@repo/form-ui/schemas/text';
+import { type ITextareaAttributes } from '@repo/form-ui/schemas/textarea';
 
-export interface IField {
-  id: string;
-  sectionId: string;
-  type: string;
-  label: string;
-  placeholder: string;
-  required: boolean;
-  order: number;
-}
+export type IFieldAttributes =
+  | ITextFieldAttributes
+  | ITextareaAttributes
+  | IEmailAttributes
+  | ICheckboxAttributes
+  | ISelectAttributes
+  | IDateAttributes;
 
 export interface IForm {
   id: string;
@@ -24,4 +20,23 @@ export interface IForm {
   sections: ISection[];
   createdAt: number;
   updatedAt: number;
+}
+
+export interface ISection {
+  id: string;
+  title: string;
+  description: string;
+  fields: IField<IFieldAttributes>[];
+  order: number;
+  showInfo: boolean;
+}
+
+export interface IField<T extends IFieldAttributes = IFieldAttributes> {
+  id: string;
+  sectionId: string;
+  type: string;
+  label: string;
+  required: boolean;
+  order: number;
+  attributes: T;
 }

@@ -7,7 +7,7 @@ import { PropsWithChildren, use } from 'react';
 import { PRIVATE_ROUTES } from '@/constants/routes';
 
 import { Button } from '@repo/core-ui/components/button';
-import EmptyState from '@repo/core-ui/components/empty-state';
+import { EmptyState } from '@repo/core-ui/components/empty-state';
 
 import FormRenderer from '@repo/form-ui/components/form-renderer';
 
