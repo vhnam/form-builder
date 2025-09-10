@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useCallback, useId } from 'react';
 
 import { type IField } from '@repo/form-ui/types/form';
 
@@ -25,19 +25,27 @@ const FormCheckbox = (field: IField) => {
 
   const { options } = attributes.data;
 
+  const renderCheckboxOption = useCallback(
+    (option: string) => {
+      const optionId = `${id}-${option}`;
+      return (
+        <div key={option} className="flex items-center gap-2" id={id}>
+          <Checkbox id={optionId} />
+          <Label className="text-sm font-medium" htmlFor={optionId}>
+            {option}
+          </Label>
+        </div>
+      );
+    },
+    [id]
+  );
+
   return (
     <div className="grid w-full gap-2">
       <Label className="text-sm font-medium" htmlFor={id}>
         {field.label}
       </Label>
-      {options.split(',').map((option) => (
-        <div key={option} className="flex items-center gap-2">
-          <Checkbox id={id} />
-          <Label className="text-sm font-medium" htmlFor={id}>
-            {option}
-          </Label>
-        </div>
-      ))}
+      {options.split(',').map((option) => renderCheckboxOption(option))}
     </div>
   );
 };

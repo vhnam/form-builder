@@ -2,6 +2,9 @@
 import "@typespec/http";
 import "@typespec/versioning";
 
+import "./types/error.tsp";
+import "./types/scalar.tsp";
+
 import "./models/form.tsp";
 import "./models/health.tsp";
 
@@ -16,5 +19,5 @@ using Versioning;
 namespace LokiForm;
 
 enum Versions {
-  v1: "1.0",
+  v1: "1.0"
 }

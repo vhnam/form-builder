@@ -35,6 +35,7 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/) with stri
 ## Technology Stack
 
 ### Frontend
+
 - **Framework**: Next.js 15 with App Router
 - **Language**: TypeScript 5.9 (strict mode)
 - **Styling**: TailwindCSS v4
@@ -43,11 +44,13 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/) with stri
 - **UI Components**: Custom design system with Shadcn UI
 
 ### Backend
+
 - **Framework**: NestJS
 - **Database**: PostgreSQL with Drizzle ORM
 - **API Documentation**: TypeSpec with OpenAPI 3.0
 
 ### Development Tools
+
 - **Package Manager**: pnpm 9.0.0
 - **Build Tool**: Turborepo 2.5.6
 - **Linting**: ESLint
@@ -216,6 +219,7 @@ npx turbo link
 ## Useful Links
 
 ### Core Technologies
+
 - [Turborepo Documentation](https://turborepo.com/docs)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [NestJS Documentation](https://docs.nestjs.com/)
@@ -223,16 +227,19 @@ npx turbo link
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)
 
 ### UI & Styling
+
 - [TailwindCSS Documentation](https://tailwindcss.com/docs)
 - [Shadcn UI Documentation](https://ui.shadcn.com/)
 - [React Hook Form Documentation](https://react-hook-form.com/)
 
 ### Database & API
+
 - [Drizzle ORM Documentation](https://orm.drizzle.team/)
 - [TypeSpec Documentation](https://typespec.io/docs/)
 - [PostgreSQL Documentation](https://www.postgresql.org/docs/)
 
 ### Development Tools
+
 - [React Query Documentation](https://tanstack.com/query/latest)
 - [Zod Documentation](https://zod.dev/)
 - [Vitest Documentation](https://vitest.dev/)
