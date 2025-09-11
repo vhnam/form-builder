@@ -6,8 +6,8 @@
   "scripts": {
     "compile": "tsp compile .",
     "watch": "tsp compile . --watch",
-    "serve": "serve . -l 1234",
-    "preview": "pnpm compile && pnpm serve"
+    "start": "serve . -l 1234",
+    "preview": "pnpm compile && pnpm start"
   },
   "devDependencies": {
     "@typespec/compiler": "1.4.0",
