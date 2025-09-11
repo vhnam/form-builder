@@ -7,23 +7,31 @@ import type {
   SignUpFormSchema,
 } from '@/schemas/auth';
 
+axios.defaults.baseURL = 'http://localhost:4000';
+
 export const useSignInMutation = () => {
   return useMutation({
-    mutationFn: (payload: SignInFormSchema) =>
-      axios.post('/api/auth/sign-in', payload),
+    mutationFn: async (payload: SignInFormSchema) => {
+      const response = await axios.post('/auth/login', payload);
+      return response.data;
+    },
   });
 };
 
 export const useSignUpMutation = () => {
   return useMutation({
-    mutationFn: (payload: SignUpFormSchema) =>
-      axios.post('/api/auth/sign-up', payload),
+    mutationFn: async (payload: SignUpFormSchema) => {
+      const response = await axios.post('/auth/register', payload);
+      return response.data;
+    },
   });
 };
 
 export const useForgotPasswordMutation = () => {
   return useMutation({
-    mutationFn: (payload: ForgotPasswordFormSchema) =>
-      axios.post('/api/auth/forgot-password', payload),
+    mutationFn: async (payload: ForgotPasswordFormSchema) => {
+      const response = await axios.post('/auth/forgot-password', payload);
+      return response.data;
+    },
   });
 };

@@ -1,12 +1,19 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+
+import { PRIVATE_ROUTES } from '@/constants/routes';
 
 import { type SignInFormSchema, signInFormSchema } from '@/schemas/auth';
 
 import { useSignInMutation } from '@/services/auth';
 
+import { useAuthStore } from '@/stores/auth';
+
 const useSignInFormActions = () => {
-  const { mutateAsync, isPending } = useSignInMutation();
+  const { setAuth } = useAuthStore();
+  const router = useRouter();
+  const { mutate, isPending } = useSignInMutation();
 
   const form = useForm<SignInFormSchema>({
     resolver: zodResolver(signInFormSchema),
@@ -16,8 +23,18 @@ const useSignInFormActions = () => {
     },
   });
 
-  const onSubmit = async (payload: SignInFormSchema) => {
-    return await mutateAsync(payload);
+  const onSubmit = (payload: SignInFormSchema) => {
+    mutate(payload, {
+      onSuccess: (response) => {
+        setAuth(
+          response.data.user,
+          response.data.accessToken,
+          response.data.refreshToken
+        );
+
+        router.push(PRIVATE_ROUTES.home);
+      },
+    });
   };
 
   return { form, onSubmit, isPending };

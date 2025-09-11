@@ -2,6 +2,7 @@
 
 import { Loader2Icon } from 'lucide-react';
 import Link from 'next/link';
+import React from 'react';
 
 import { PUBLIC_ROUTES } from '@/constants/routes';
 

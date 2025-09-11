@@ -1,4 +1,6 @@
-import { ComponentProps } from 'react';
+import { type ComponentProps } from 'react';
+
+import { useAuthStore } from '@/stores/auth';
 
 import {
   Sidebar,
@@ -13,15 +15,9 @@ import NavBrand from './nav-brand';
 import NavMain from './nav-main';
 import NavUser from './nav-user';
 
-const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: 'https://ui.shadcn.com/avatars/shadcn.jpg',
-  },
-};
-
 const AppSidebar = (props: ComponentProps<typeof Sidebar>) => {
+  const { user } = useAuthStore();
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -33,7 +29,7 @@ const AppSidebar = (props: ComponentProps<typeof Sidebar>) => {
         </SidebarGroupContent>
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user!} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

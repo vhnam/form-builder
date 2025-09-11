@@ -8,11 +8,10 @@ import { PRIVATE_ROUTES } from '@/constants/routes';
 
 import { useClientOnly } from '@repo/core-ui/hooks/use-client-only';
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@repo/core-ui/components/avatar';
+import { User } from '@/types/user';
+
+import UserProfile from '@/components/user-profile';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,11 +29,7 @@ import {
 } from '@repo/core-ui/components/sidebar';
 
 interface NavUserProps {
-  user: {
-    name: string;
-    email: string;
-    avatar: string;
-  };
+  user: User;
 }
 
 const NavUser = ({ user }: NavUserProps) => {
@@ -51,14 +46,7 @@ const NavUser = ({ user }: NavUserProps) => {
       <SidebarMenu>
         <SidebarMenuItem>
           <SidebarMenuButton size="lg">
-            <Avatar className="h-8 w-8 rounded-lg">
-              <AvatarImage src={user.avatar} alt={user.name} />
-              <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-            </Avatar>
-            <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-medium">{user.name}</span>
-              <span className="truncate text-xs">{user.email}</span>
-            </div>
+            <UserProfile user={user} />
             <ChevronsUpDown className="ml-auto size-4" />
           </SidebarMenuButton>
         </SidebarMenuItem>
@@ -75,14 +63,7 @@ const NavUser = ({ user }: NavUserProps) => {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-              </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
-              </div>
+              <UserProfile user={user} />
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
@@ -94,14 +75,7 @@ const NavUser = ({ user }: NavUserProps) => {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
-                </div>
+                <UserProfile user={user} />
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />

@@ -11,7 +11,9 @@
       "@/modules/*": ["./modules/*"],
       "@/providers/*": ["./providers/*"],
       "@/schemas/*": ["./schemas/*"],
-      "@/services/*": ["./services/*"]
+      "@/services/*": ["./services/*"],
+      "@/stores/*": ["./stores/*"],
+      "@/types/*": ["./types/*"]
     },
     "plugins": [
       {
