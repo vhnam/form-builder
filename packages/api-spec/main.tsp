@@ -9,7 +9,9 @@ import "./types/scalar.tsp";
 import "./models/form.tsp";
 import "./models/form-response.tsp";
 import "./models/health.tsp";
+import "./models/user.tsp";
 
+import "./apis/auth.tsp";
 import "./apis/form.tsp";
 import "./apis/form-response.tsp";
 import "./apis/health.tsp";

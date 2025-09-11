@@ -17,7 +17,8 @@ export const userRoleEnum = pgEnum('user_role', [
 export const users = pgTable('users', {
   id: uuid('id').primaryKey().defaultRandom(),
   email: varchar('email', { length: 255 }).notNull().unique(),
-  name: varchar('name', { length: 255 }).notNull(),
+  firstName: varchar('first_name', { length: 255 }).notNull(),
+  lastName: varchar('last_name', { length: 255 }).notNull(),
   password: varchar('password', { length: 255 }).notNull(),
   role: userRoleEnum('role').default('user').notNull(),
   isActive: boolean('is_active').default(true).notNull(),
@@ -32,3 +33,4 @@ export const selectUserSchema = createSelectSchema(users);
 // Type exports
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
+export type UserRole = (typeof userRoleEnum.enumValues)[number];

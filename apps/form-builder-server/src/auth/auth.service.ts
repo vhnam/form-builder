@@ -19,6 +19,8 @@ import {
   ResetPasswordDto,
 } from './dto';
 
+import { UserRole } from '../database/schema/users';
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -64,7 +66,11 @@ export class AuthService {
   async login(loginDto: LoginDto) {
     const user = await this.validateUser(loginDto.email, loginDto.password);
 
-    const payload = { email: user.email, sub: user.id, role: user.role };
+    const payload = {
+      email: user.email,
+      sub: user.id,
+      role: user.role as string,
+    };
 
     const accessToken = this.generateAccessToken(payload);
     const refreshToken = this.generateRefreshToken(payload);
@@ -75,7 +81,8 @@ export class AuthService {
       user: {
         id: user.id,
         email: user.email,
-        name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
         role: user.role,
         isActive: user.isActive,
       },
@@ -86,16 +93,14 @@ export class AuthService {
     user: {
       id: string;
       email: string;
-      roleId: string;
-      // role: { name: string; permissions: Permission[] };
-      role: string;
+      role: UserRole;
     },
     expiresIn?: string,
   ): { accessToken: string; refreshToken: string } {
     const payload = {
       sub: user.id,
       email: user.email,
-      role: user.role,
+      role: user.role as string,
     };
 
     return {
@@ -115,7 +120,8 @@ export class AuthService {
     const hashedPassword = await bcrypt.hash(registerDto.password, 10);
 
     const savedUser = await this.usersService.create({
-      name: registerDto.name,
+      firstName: registerDto.firstName,
+      lastName: registerDto.lastName,
       email: registerDto.email,
       password: hashedPassword,
       role: 'user',
@@ -124,7 +130,7 @@ export class AuthService {
     const payload = {
       sub: savedUser.id,
       email: savedUser.email,
-      role: savedUser.role,
+      role: savedUser.role as string,
     };
 
     const accessToken = this.generateAccessToken(payload);
@@ -135,7 +141,8 @@ export class AuthService {
       refreshToken,
       user: {
         id: savedUser.id,
-        name: savedUser.name,
+        firstName: savedUser.firstName,
+        lastName: savedUser.lastName,
         email: savedUser.email,
         role: savedUser.role,
       },
@@ -151,9 +158,10 @@ export class AuthService {
 
     return {
       id: user.id,
-      name: user.name,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
-      role: user.role,
+      role: user.role as UserRole,
       isActive: user.isActive,
     };
   }
@@ -173,7 +181,7 @@ export class AuthService {
       const newPayload = {
         sub: user.id,
         email: user.email,
-        role: user.role,
+        role: user.role as string,
       };
 
       const newAccessToken = this.generateAccessToken(newPayload);
@@ -184,7 +192,8 @@ export class AuthService {
         refreshToken: newRefreshToken,
         user: {
           id: user.id,
-          name: user.name,
+          firstName: user.firstName,
+          lastName: user.lastName,
           email: user.email,
           role: user.role,
         },
@@ -282,7 +291,6 @@ export class AuthService {
     return {
       message: 'Password reset email sent successfully',
       email: user.email,
-      resetToken, // Remove this in production - only for testing
     };
   }
 

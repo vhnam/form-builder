@@ -9,11 +9,17 @@ import {
 export class RegisterDto {
   @IsString()
   @IsNotEmpty()
-  @MaxLength(100)
-  name: string;
+  @MaxLength(255)
+  firstName: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(255)
+  lastName: string;
 
   @IsEmail()
   @IsNotEmpty()
+  @MaxLength(255)
   email: string;
 
   @IsString()

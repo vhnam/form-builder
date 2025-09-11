@@ -16,7 +16,7 @@ async function main() {
   console.log('✅ Database reset completed');
 
   // Generate password hash
-  const password = 'SuperAdmin123!';
+  const password = 'Azxcv!123';
   const hashedPassword = await bcrypt.hash(password, 10);
   console.log('🔐 Generated hash for password');
 
@@ -28,8 +28,11 @@ async function main() {
         email: funcs.valuesFromArray({
           values: ['sa@lokiform.io'],
         }),
-        name: funcs.valuesFromArray({
-          values: ['Super Admin'],
+        firstName: funcs.valuesFromArray({
+          values: ['Vincent'],
+        }),
+        lastName: funcs.valuesFromArray({
+          values: ['Wu'],
         }),
         password: funcs.valuesFromArray({
           values: [hashedPassword],

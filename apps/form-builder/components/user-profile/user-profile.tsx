@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 
 import { useClientOnly } from '@repo/core-ui/hooks/use-client-only';
 
@@ -13,14 +13,20 @@ interface UserProfileProps {
 const UserProfile = ({ user }: UserProfileProps) => {
   const hasMounted = useClientOnly();
 
+  const shortName = useMemo(
+    () =>
+      user
+        ? ([user.firstName, user.lastName]
+            .filter(Boolean)
+            .map((name) => name[0]?.toUpperCase() || '')
+            .join('') ?? '-')
+        : '-',
+    [user]
+  );
+
   if (!hasMounted) {
     return null;
   }
-
-  const shortName = user.name
-    .split(' ')
-    .map((name) => name[0]!.toUpperCase())
-    .join('');
 
   return (
     <div className="flex items-center gap-2">
@@ -28,7 +34,9 @@ const UserProfile = ({ user }: UserProfileProps) => {
         <AvatarFallback className="rounded-lg">{shortName}</AvatarFallback>
       </Avatar>
       <div className="grid flex-1 text-left text-sm leading-tight">
-        <span className="truncate font-medium">{user.name}</span>
+        <span className="truncate font-medium">
+          {user.firstName} {user.lastName}
+        </span>
         <span className="truncate text-xs">{user.email}</span>
       </div>
     </div>
