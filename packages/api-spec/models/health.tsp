@@ -1,4 +1,3 @@
-
 import "@typespec/http";
 import "@typespec/rest";
 
@@ -8,8 +7,7 @@ using Rest;
 @route("/health")
 @tag("Health")
 namespace LokiForm.Health {
-
-  model ServerHealth{
+  model ServerHealth {
     environment: string;
     status: string;
     uptime: string;

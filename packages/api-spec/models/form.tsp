@@ -1,4 +1,3 @@
-
 import "@typespec/http";
 import "@typespec/rest";
 
@@ -9,7 +8,6 @@ using Rest;
 @tag("Forms")
 @useAuth(BearerAuth)
 namespace LokiForm.Forms {
-  
   model Form {
     @visibility(Lifecycle.Read)
     id: uuid;
@@ -33,23 +31,23 @@ namespace LokiForm.Forms {
   op listForms(): Form[];
 
   @get
-  op getForm(
-    @path formId: string
-  ): Form | NotFoundError;
+  op getForm(@path formId: string): Form | NotFoundError;
 
   @post
-  op createForm(
-    @body form: Form
-  ): Form | ValidationError | UnauthorizedError;
+  op createForm(@body form: Form): Form | ValidationError | UnauthorizedError;
 
   @put
-  op updateForm(
-    @path formId: string,
-    @body form: Form
-  ): Form | ValidationError | UnauthorizedError | NotFoundError | InternalServerError;
+  op updateForm(@path formId: string, @body form: Form):
+    | Form
+    | ValidationError
+    | UnauthorizedError
+    | NotFoundError
+    | InternalServerError;
 
   @delete
-  op deleteForm(
-    @path formId: string
-  ): void | NotFoundError | UnauthorizedError | InternalServerError;
+  op deleteForm(@path formId: string):
+    | void
+    | NotFoundError
+    | UnauthorizedError
+    | InternalServerError;
 }
