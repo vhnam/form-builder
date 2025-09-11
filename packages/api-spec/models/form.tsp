@@ -1,53 +1,105 @@
-import "@typespec/http";
-import "@typespec/rest";
+import "../enums/form.tsp";
 
-using Http;
-using Rest;
+model Field<T> {
+  @visibility(Lifecycle.Read)
+  id: uuid;
 
-@route("/forms")
-@tag("Forms")
-@useAuth(BearerAuth)
-namespace LokiForm.Forms {
-  model Form {
-    @visibility(Lifecycle.Read)
-    id: uuid;
+  sectionId: string;
+  type: FieldType;
+  label: string;
+  required: boolean;
+  order: int32;
+  attributes: T;
+}
 
-    @minLength(1)
-    @maxLength(255)
-    title: string;
+model FieldAttributes {}
 
-    @minLength(0)
-    @maxLength(255)
-    description: string;
+model TextFieldAttributes extends FieldAttributes {
+  placeholder?: string;
+  minLength?: int32;
+  maxLength?: int32;
+  defaultValue?: string;
+}
 
-    @visibility(Lifecycle.Read)
-    createdAt: uint32;
+model TextareaFieldAttributes extends FieldAttributes {
+  placeholder?: string;
+  minLength?: int32;
+  maxLength?: int32;
+  defaultValue?: string;
+  rows?: int32;
+}
 
-    @visibility(Lifecycle.Read)
-    updatedAt: uint32;
-  }
+model EmailFieldAttributes extends FieldAttributes {
+  placeholder?: string;
+  minLength?: int32;
+  maxLength?: int32;
+  defaultValue?: string;
+}
 
-  @get
-  op listForms(): Form[];
+model CheckboxFieldAttributes extends FieldAttributes {
+  options: string;
+  minSelected?: int32;
+  maxSelected?: int32;
+}
 
-  @get
-  op getForm(@path formId: string): Form | NotFoundError;
+model SelectFieldAttributes extends FieldAttributes {
+  options: string;
+  minSelected?: int32;
+  maxSelected?: int32;
+  placeholder?: string;
+  defaultValue?: string;
+}
 
-  @post
-  op createForm(@body form: Form): Form | ValidationError | UnauthorizedError;
+model DateFieldAttributes extends FieldAttributes {
+  options: string;
+  beforeDate?: int32;
+  afterDate?: int32;
+  placeholder?: string;
+  defaultValue?: string;
+  dateFormat?: string;
+  mode?: DateMode;
+}
 
-  @put
-  op updateForm(@path formId: string, @body form: Form):
-    | Form
-    | ValidationError
-    | UnauthorizedError
-    | NotFoundError
-    | InternalServerError;
+model Form {
+  @visibility(Lifecycle.Read)
+  id: uuid;
 
-  @delete
-  op deleteForm(@path formId: string):
-    | void
-    | NotFoundError
-    | UnauthorizedError
-    | InternalServerError;
+  @minLength(1)
+  @maxLength(255)
+  title: string;
+
+  @minLength(0)
+  @maxLength(255)
+  description: string;
+
+  sections: Section[];
+  userId: uuid;
+  isActive: boolean;
+
+  @invisible(Lifecycle)
+  createdAt: unixTimestamp32;
+
+  @invisible(Lifecycle)
+  updatedAt: unixTimestamp32;
+}
+
+model Section {
+  @visibility(Lifecycle.Read)
+  id: uuid;
+
+  @minLength(1)
+  @maxLength(255)
+  title: string;
+
+  @minLength(0)
+  @maxLength(255)
+  description: string;
+
+  fields: Field<FieldAttributes>[];
+
+  @invisible(Lifecycle)
+  createdAt: unixTimestamp32;
+
+  @invisible(Lifecycle)
+  updatedAt: unixTimestamp32;
 }

@@ -6,12 +6,10 @@
   "scripts": {
     "compile": "tsp compile .",
     "watch": "tsp compile . --watch",
-    "build": "redocly build-docs tsp-output/schema/openapi.1.0.yaml -o tsp-output/static/index.html",
-    "start": "serve tsp-output/static -l 1234",
+    "serve": "serve . -l 1234",
     "preview": "pnpm compile && pnpm build && pnpm start"
   },
   "devDependencies": {
-    "@redocly/cli": "^2.1.0",
     "@typespec/compiler": "1.4.0",
     "@typespec/http": "1.4.0",
     "@typespec/openapi3": "1.4.0",

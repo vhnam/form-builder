@@ -1,16 +1,22 @@
 import baseConfig from "@repo/prettier-config";
 
+const {
+  importOrderSeparation,
+  importOrderSortSpecifiers,
+  plugins,
+  ...omittedProperties
+} = baseConfig;
+
 export default {
-  ...baseConfig,
+  ...omittedProperties,
   plugins: ["@typespec/prettier-plugin-typespec"],
   overrides: [
     ...(baseConfig.overrides || []),
     {
       files: "**/*.tsp",
       options: {
-        detectIndentation: false,
-        insertSpaces: true,
-        tabSize: 2,
+        useTabs: false,
+        tabWidth: 2,
       },
     },
   ],
