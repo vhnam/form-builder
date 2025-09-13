@@ -1,21 +1,22 @@
 import {
-  Controller,
-  Post,
   Body,
+  Controller,
   Get,
-  UseGuards,
-  Request,
+  Post,
   Put,
+  Request,
+  UseGuards,
 } from '@nestjs/common';
+
 import { AuthService } from './auth.service';
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import { LoginDto } from './dto/login.dto';
-import { RefreshTokenDto } from './dto/refresh-token.dto';
-import { LogoutDto } from './dto/logout.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
+import { LoginDto } from './dto/login.dto';
+import { LogoutDto } from './dto/logout.dto';
+import { RefreshTokenDto } from './dto/refresh-token.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
 interface RequestWithUser extends Request {
   user: {
@@ -44,7 +45,7 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   async updateProfile(
     @Request() req: RequestWithUser,
-    @Body() updateProfileDto: UpdateProfileDto,
+    @Body() updateProfileDto: UpdateProfileDto
   ) {
     return await this.authService.updateProfile(req.user.id, updateProfileDto);
   }
@@ -64,12 +65,12 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   async changePassword(
     @Request() req: RequestWithUser,
-    @Body() changePasswordDto: ChangePasswordDto,
+    @Body() changePasswordDto: ChangePasswordDto
   ) {
     return await this.authService.changePassword(
       req.user.id,
       changePasswordDto.oldPassword,
-      changePasswordDto.newPassword,
+      changePasswordDto.newPassword
     );
   }
 

@@ -1,4 +1,4 @@
-import { InterfaceMode, InterfaceLanguage } from '../../database/schema/users';
+import { InterfaceLanguage, InterfaceMode } from '../../database/schema/users';
 
 export class GetProfileDto {
   id: string;

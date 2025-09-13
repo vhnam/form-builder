@@ -6,6 +6,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
+
 import { users } from './users';
 
 export const passwordResetTokens = pgTable('password_reset_tokens', {

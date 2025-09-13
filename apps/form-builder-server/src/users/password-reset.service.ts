@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { eq, and } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
+
 import { DatabaseService } from '../database/database.service';
 import {
-  passwordResetTokens,
-  PasswordResetToken,
   NewPasswordResetToken,
+  PasswordResetToken,
+  passwordResetTokens,
 } from '../database/schema';
 
 @Injectable()
@@ -37,8 +38,8 @@ export class PasswordResetService {
       .where(
         and(
           eq(passwordResetTokens.token, token),
-          eq(passwordResetTokens.isUsed, false),
-        ),
+          eq(passwordResetTokens.isUsed, false)
+        )
       )
       .limit(1);
 
@@ -59,8 +60,8 @@ export class PasswordResetService {
       .where(
         and(
           eq(passwordResetTokens.userId, userId),
-          eq(passwordResetTokens.isUsed, false),
-        ),
+          eq(passwordResetTokens.isUsed, false)
+        )
       );
   }
 }

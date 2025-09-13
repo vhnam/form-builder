@@ -1,1 +1,1 @@
-@{./.cursor/rules/*.mdc}
+@{./.cursor/rules/\*.mdc}

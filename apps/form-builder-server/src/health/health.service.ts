@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { DatabaseService } from '../database/database.service';
 import { sql } from 'drizzle-orm';
+
+import { DatabaseService } from '../database/database.service';
 
 @Injectable()
 export class HealthService {

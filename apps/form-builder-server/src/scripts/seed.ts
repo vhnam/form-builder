@@ -1,8 +1,9 @@
-import { drizzle } from 'drizzle-orm/postgres-js';
-import { seed, reset } from 'drizzle-seed';
-import postgres from 'postgres';
-import { users } from '../database/schema';
 import * as bcrypt from 'bcrypt';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import { reset, seed } from 'drizzle-seed';
+import postgres from 'postgres';
+
+import { users } from '../database/schema';
 
 async function main() {
   const connection = postgres(getConnectionString());

@@ -4,13 +4,14 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { UsersService } from '../users/users.service';
-import { PasswordResetService } from '../users/password-reset.service';
-import * as bcrypt from 'bcrypt';
-import { LoginDto } from './dto/login.dto';
 import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcrypt';
 import crypto from 'crypto';
+
+import { UserRole } from '../database/schema/users';
+import { PasswordResetService } from '../users/password-reset.service';
+import { UsersService } from '../users/users.service';
 import {
   ForgotPasswordDto,
   GetProfileDto,
@@ -19,8 +20,7 @@ import {
   ResetPasswordDto,
   UpdateProfileDto,
 } from './dto';
-
-import { UserRole } from '../database/schema/users';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -28,7 +28,7 @@ export class AuthService {
     private configService: ConfigService,
     private usersService: UsersService,
     private passwordResetService: PasswordResetService,
-    private jwtService: JwtService,
+    private jwtService: JwtService
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
@@ -96,7 +96,7 @@ export class AuthService {
       email: string;
       role: UserRole;
     },
-    expiresIn?: string,
+    expiresIn?: string
   ): { accessToken: string; refreshToken: string } {
     const payload = {
       sub: user.id,
@@ -171,7 +171,7 @@ export class AuthService {
 
   async updateProfile(
     userId: string,
-    updateProfileDto: UpdateProfileDto,
+    updateProfileDto: UpdateProfileDto
   ): Promise<GetProfileDto> {
     const user = await this.usersService.findById(userId);
 
@@ -294,7 +294,7 @@ export class AuthService {
   async changePassword(
     userId: string,
     oldPassword: string,
-    newPassword: string,
+    newPassword: string
   ) {
     const user = await this.usersService.findById(userId);
 

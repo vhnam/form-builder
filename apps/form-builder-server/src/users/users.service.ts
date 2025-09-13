@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
+
 import { DatabaseService } from '../database/database.service';
-import { users, User, NewUser } from '../database/schema';
+import { NewUser, User, users } from '../database/schema';
 
 @Injectable()
 export class UsersService {
@@ -58,7 +59,7 @@ export class UsersService {
 
   async update(
     id: string,
-    userData: Partial<NewUser>,
+    userData: Partial<NewUser>
   ): Promise<User | undefined> {
     const result = await this.databaseService.db
       .update(users)

@@ -1,4 +1,5 @@
-import { IsOptional, IsString, IsIn, MinLength } from 'class-validator';
+import { IsIn, IsOptional, IsString, MinLength } from 'class-validator';
+
 import * as users from '../../database/schema/users';
 
 export class UpdateProfileDto {
