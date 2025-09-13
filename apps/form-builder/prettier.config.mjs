@@ -12,6 +12,7 @@ export default {
           '^@/constants/(.*)$',
           '^@repo/core-ui/lib(.*)$',
           '^@/hooks/(.*)$',
+          '^@/utils/(.*)$',
           '^@repo/core-ui/hooks(.*)$',
           '^@/providers/(.*)$',
           '^@/schemas/(.*)$',

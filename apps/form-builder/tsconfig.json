@@ -13,7 +13,8 @@
       "@/schemas/*": ["./schemas/*"],
       "@/services/*": ["./services/*"],
       "@/stores/*": ["./stores/*"],
-      "@/types/*": ["./types/*"]
+      "@/types/*": ["./types/*"],
+      "@/utils/*": ["./utils/*"]
     },
     "plugins": [
       {

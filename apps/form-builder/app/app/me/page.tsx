@@ -1,3 +1,7 @@
+'use client';
+
+import { useGetProfileQuery } from '@/services/auth/auth.queries';
+
 import { Button } from '@repo/core-ui/components/button';
 
 import { PrivateLayoutHeader } from '@/layouts/private';
@@ -5,6 +9,8 @@ import { PrivateLayoutHeader } from '@/layouts/private';
 import Profile from '@/modules/profile';
 
 const ProfilePage = () => {
+  const { data, isPending } = useGetProfileQuery();
+
   return (
     <>
       <PrivateLayoutHeader
@@ -15,7 +21,7 @@ const ProfilePage = () => {
           </Button>
         }
       />
-      <Profile />
+      {isPending ? <div>Loading...</div> : <Profile user={data.data} />}
     </>
   );
 };
