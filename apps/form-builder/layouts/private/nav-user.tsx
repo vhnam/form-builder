@@ -4,11 +4,13 @@ import { BadgeCheckIcon, ChevronsUpDown, LogOutIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
-import { PRIVATE_ROUTES } from '@/constants/routes';
+import { PRIVATE_ROUTES, PUBLIC_ROUTES } from '@/constants/routes';
 
 import { useClientOnly } from '@repo/core-ui/hooks/use-client-only';
 
 import { User } from '@/types/user';
+
+import { useLogoutMutation } from '@/services/auth';
 
 import UserProfile from '@/components/user-profile';
 
@@ -33,13 +35,24 @@ interface NavUserProps {
 }
 
 const NavUser = ({ user }: NavUserProps) => {
-  const { isMobile } = useSidebar();
-  const hasMounted = useClientOnly();
   const router = useRouter();
+  const hasMounted = useClientOnly();
+  const { isMobile } = useSidebar();
+  const { mutate: logout } = useLogoutMutation();
 
   const handleProfileClick = useCallback(() => {
     router.push(PRIVATE_ROUTES.profile);
   }, [router]);
+
+  const handleLogoutClick = useCallback(
+    () =>
+      logout(undefined, {
+        onSuccess: () => {
+          router.push(PUBLIC_ROUTES.auth.signIn);
+        },
+      }),
+    [logout, router]
+  );
 
   if (!hasMounted) {
     return (
@@ -86,7 +99,7 @@ const NavUser = ({ user }: NavUserProps) => {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogoutClick}>
               <LogOutIcon />
               Log out
             </DropdownMenuItem>

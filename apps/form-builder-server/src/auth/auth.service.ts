@@ -52,7 +52,7 @@ export class AuthService {
       expiresIn:
         expiresIn ||
         this.configService.get<string>('JWT_ACCESS_TOKEN_EXPIRES_IN') ||
-        '15m',
+        '30m',
     });
   }
 
@@ -60,7 +60,7 @@ export class AuthService {
     return this.jwtService.sign(payload, {
       secret: this.configService.get<string>('JWT_SECRET'),
       expiresIn:
-        this.configService.get<string>('JWT_REFRESH_TOKEN_EXPIRES_IN') || '30m',
+        this.configService.get<string>('JWT_REFRESH_TOKEN_EXPIRES_IN') || '1h',
     });
   }
 
@@ -85,6 +85,8 @@ export class AuthService {
         firstName: user.firstName,
         lastName: user.lastName,
         role: user.role,
+        interfaceMode: user.interfaceMode,
+        interfaceLanguage: user.interfaceLanguage,
         isActive: user.isActive,
       },
     };

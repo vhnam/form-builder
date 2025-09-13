@@ -29,7 +29,7 @@ const useSignInFormActions = () => {
     mutate(payload, {
       onSuccess: (response) => {
         setAuth(response.user, response.accessToken, response.refreshToken);
-        setTheme(response.user.interfaceMode);
+        setTheme(response.user.interfaceMode || 'system');
 
         router.push(PRIVATE_ROUTES.home);
       },

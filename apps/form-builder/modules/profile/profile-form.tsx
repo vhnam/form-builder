@@ -1,11 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useTheme } from 'next-themes';
-import { useRouter } from 'next/navigation';
 import React, { forwardRef, useImperativeHandle } from 'react';
-import { FormState } from 'react-hook-form';
 import { toast } from 'sonner';
-
-import { PRIVATE_ROUTES } from '@/constants/routes';
 
 import { useClientOnly } from '@repo/core-ui/hooks/use-client-only';
 
@@ -47,13 +43,11 @@ interface ProfileFormProps {
 
 export interface ProfileFormRef {
   isSubmitting: boolean;
-  formState: FormState<ProfileFormSchema>;
   submit: () => void;
 }
 
 const ProfileForm = forwardRef<ProfileFormRef, ProfileFormProps>(
   ({ user }, ref) => {
-    const router = useRouter();
     const { setTheme } = useTheme();
     const queryClient = useQueryClient();
     const hasMounted = useClientOnly();
@@ -62,7 +56,6 @@ const ProfileForm = forwardRef<ProfileFormRef, ProfileFormProps>(
     useImperativeHandle(ref, () => ({
       submit: form.handleSubmit(handleFormSubmit),
       isSubmitting: isPending,
-      formState: form.formState,
     }));
 
     const handleFormSubmit = async (payload: ProfileFormSchema) => {
@@ -71,11 +64,9 @@ const ProfileForm = forwardRef<ProfileFormRef, ProfileFormProps>(
         await queryClient.invalidateQueries({
           queryKey: profileQueryKey.getProfile,
         });
+
         setTheme(response.interfaceMode);
         toast.success('Profile updated successfully');
-        setTimeout(() => {
-          router.push(PRIVATE_ROUTES.home);
-        }, 1000);
       } catch (error) {
         toast.error('Failed to update profile');
         console.log(error);

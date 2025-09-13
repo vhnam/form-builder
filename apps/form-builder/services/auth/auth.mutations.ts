@@ -44,3 +44,12 @@ export const useProfileMutation = () => {
     },
   });
 };
+
+export const useLogoutMutation = () => {
+  return useMutation({
+    mutationFn: async () => {
+      const response = await apiClient.post('/auth/logout');
+      return response.data;
+    },
+  });
+};

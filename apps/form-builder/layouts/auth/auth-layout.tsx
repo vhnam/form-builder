@@ -1,11 +1,21 @@
+'use client';
+
+import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 
 import { BRAND_LOGO, BRAND_NAME } from '@/constants/branding';
 import { PUBLIC_ROUTES } from '@/constants/routes';
 
 const AuthLayout = ({ children }: PropsWithChildren) => {
+  const { setTheme } = useTheme();
+
+  useEffect(() => {
+    const theme = localStorage.getItem('theme');
+    setTheme(theme || 'system');
+  }, [setTheme]);
+
   return (
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
       <div className="flex w-full max-w-sm flex-col gap-6">

@@ -34,10 +34,7 @@ const ProfilePage = () => {
           <Button
             variant="default"
             onClick={handleSave}
-            disabled={
-              profileFormRef.current?.isSubmitting ||
-              !profileFormRef.current?.formState?.isDirty
-            }
+            disabled={profileFormRef.current?.isSubmitting}
           >
             {profileFormRef.current?.isSubmitting ? 'Saving...' : 'Save'}
           </Button>
