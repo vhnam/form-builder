@@ -30,6 +30,12 @@ model User {
   @visibility(Lifecycle.Read)
   role: Role;
 
+  @doc("User's preferred interface theme mode")
+  interfaceMode: InterfaceMode;
+
+  @doc("User's preferred interface language")
+  interfaceLanguage: InterfaceLanguage;
+
   @doc("Whether the user account is active and can access the system")
   isActive: boolean;
 

@@ -1,29 +1,33 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 import { User } from '@/types/user';
 
-interface AuthState {
+interface AuthStorage {
   user: User | null;
   token: string | null;
   refreshToken: string | null;
   isAuthenticated: boolean;
+}
 
+interface AuthActions {
   setAuth: (user: User, token: string, refreshToken: string) => void;
   setTokens: (token: string, refreshToken: string) => void;
   clearAuth: () => void;
   updateUser: (user: Partial<User>) => void;
-  checkAuthConsistency: () => boolean;
 }
 
-export const useAuthStore = create<AuthState>()(
+const initialState: AuthStorage = {
+  user: null,
+  token: null,
+  refreshToken: null,
+  isAuthenticated: false,
+};
+
+export const useAuthStore = create<AuthStorage & AuthActions>()(
   persist(
     (set, get) => ({
-      user: null,
-      token: null,
-      refreshToken: null,
-      isAuthenticated: false,
-
+      ...initialState,
       setAuth: (user, token, refreshToken) => {
         set({
           user,
@@ -32,23 +36,15 @@ export const useAuthStore = create<AuthState>()(
           isAuthenticated: true,
         });
       },
-
+      clearAuth: () => {
+        set({ ...initialState });
+      },
       setTokens: (token, refreshToken) => {
         set({
           token,
           refreshToken,
         });
       },
-
-      clearAuth: () => {
-        set({
-          user: null,
-          token: null,
-          refreshToken: null,
-          isAuthenticated: false,
-        });
-      },
-
       updateUser: (userData) => {
         const currentUser = get().user;
         if (currentUser) {
@@ -57,36 +53,10 @@ export const useAuthStore = create<AuthState>()(
           });
         }
       },
-
-      checkAuthConsistency: () => {
-        const state = get();
-        const isConsistent =
-          state.isAuthenticated &&
-          Boolean(state.token) &&
-          Boolean(state.refreshToken);
-
-        if (!isConsistent && state.isAuthenticated) {
-          console.log('Inconsistent auth state detected, clearing auth');
-          set({
-            user: null,
-            token: null,
-            refreshToken: null,
-            isAuthenticated: false,
-          });
-          return false;
-        }
-
-        return isConsistent;
-      },
     }),
     {
       name: 'auth-storage',
-      partialize: (state) => ({
-        user: state.user,
-        token: state.token,
-        refreshToken: state.refreshToken,
-        isAuthenticated: state.isAuthenticated,
-      }),
+      storage: createJSONStorage(() => localStorage),
       onRehydrateStorage: () => (state) => {
         if (
           state &&

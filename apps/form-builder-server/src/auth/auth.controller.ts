@@ -5,6 +5,7 @@ import {
   Get,
   UseGuards,
   Request,
+  Put,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
@@ -14,6 +15,7 @@ import { LogoutDto } from './dto/logout.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
+import { UpdateProfileDto } from './dto/update-profile.dto';
 
 interface RequestWithUser extends Request {
   user: {
@@ -29,30 +31,33 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
-    const result = await this.authService.login(loginDto);
-    return { data: result };
+    return await this.authService.login(loginDto);
   }
 
   @Get('profile')
   @UseGuards(JwtAuthGuard)
   async getProfile(@Request() req: RequestWithUser) {
-    const profile = await this.authService.getProfile(req.user.id);
-    return { data: profile };
+    return await this.authService.getProfile(req.user.id);
+  }
+
+  @Put('profile')
+  @UseGuards(JwtAuthGuard)
+  async updateProfile(
+    @Request() req: RequestWithUser,
+    @Body() updateProfileDto: UpdateProfileDto,
+  ) {
+    return await this.authService.updateProfile(req.user.id, updateProfileDto);
   }
 
   @Post('refresh')
   async refreshToken(@Body() refreshTokenDto: RefreshTokenDto) {
-    const result = await this.authService.refreshToken(
-      refreshTokenDto.refreshToken,
-    );
-    return { data: result };
+    return await this.authService.refreshToken(refreshTokenDto.refreshToken);
   }
 
   @Post('logout')
   @UseGuards(JwtAuthGuard)
   async logout(@Request() req: RequestWithUser, @Body() logoutDto?: LogoutDto) {
-    const result = await this.authService.logout(req.user.id, logoutDto);
-    return { data: result };
+    return await this.authService.logout(req.user.id, logoutDto);
   }
 
   @Post('change-password')
@@ -61,23 +66,20 @@ export class AuthController {
     @Request() req: RequestWithUser,
     @Body() changePasswordDto: ChangePasswordDto,
   ) {
-    const result = await this.authService.changePassword(
+    return await this.authService.changePassword(
       req.user.id,
       changePasswordDto.oldPassword,
       changePasswordDto.newPassword,
     );
-    return { data: result };
   }
 
   @Post('forgot-password')
   async forgotPassword(@Body() forgotPasswordDto: ForgotPasswordDto) {
-    const result = await this.authService.forgotPassword(forgotPasswordDto);
-    return { data: result };
+    return await this.authService.forgotPassword(forgotPasswordDto);
   }
 
   @Post('reset-password')
   async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
-    const result = await this.authService.resetPassword(resetPasswordDto);
-    return { data: result };
+    return await this.authService.resetPassword(resetPasswordDto);
   }
 }

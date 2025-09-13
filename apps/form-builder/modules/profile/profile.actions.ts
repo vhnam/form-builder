@@ -1,23 +1,20 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { PRIVATE_ROUTES } from '@/constants/routes';
+import { omit } from '@repo/core-ui/lib/lodash';
 
 import { type ProfileFormSchema, profileFormSchema } from '@/schemas/profile';
 
 import { User } from '@/types/user';
+
+import { useProfileMutation } from '@/services/auth';
 
 interface UseProfileFormActionsProps {
   user: User;
 }
 
 const useProfileFormActions = ({ user }: UseProfileFormActionsProps) => {
-  // const router = useRouter();
-  // const { mutate, isPending } = useSignInMutation();
-
-  console.log('user', user);
+  const { mutateAsync, isPending } = useProfileMutation();
 
   const form = useForm<ProfileFormSchema>({
     resolver: zodResolver(profileFormSchema),
@@ -25,18 +22,17 @@ const useProfileFormActions = ({ user }: UseProfileFormActionsProps) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      interfaceMode: user.interfaceMode,
+      interfaceLanguage: user.interfaceLanguage,
     },
   });
 
-  const onSubmit = (payload: ProfileFormSchema) => {
-    // mutate(payload, {
-    //   onSuccess: (response) => {
-    //     console.log(response);
-    //   },
-    // });
+  const onSubmit = async (payload: ProfileFormSchema) => {
+    const omitiedPayload = omit(payload, 'email');
+    return await mutateAsync(omitiedPayload);
   };
 
-  return { form, onSubmit };
+  return { form, isPending, onSubmit };
 };
 
 export default useProfileFormActions;

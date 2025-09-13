@@ -1,6 +1,5 @@
-import axiosInstance from '@/utils/axios';
-
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTheme } from 'next-themes';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
@@ -13,8 +12,9 @@ import { useSignInMutation } from '@/services/auth';
 import { useAuthStore } from '@/stores/auth';
 
 const useSignInFormActions = () => {
-  const { setAuth } = useAuthStore();
   const router = useRouter();
+  const { setTheme } = useTheme();
+  const { setAuth } = useAuthStore();
   const { mutate, isPending } = useSignInMutation();
 
   const form = useForm<SignInFormSchema>({
@@ -28,11 +28,8 @@ const useSignInFormActions = () => {
   const onSubmit = (payload: SignInFormSchema) => {
     mutate(payload, {
       onSuccess: (response) => {
-        setAuth(
-          response.data.user,
-          response.data.accessToken,
-          response.data.refreshToken
-        );
+        setAuth(response.user, response.accessToken, response.refreshToken);
+        setTheme(response.user.interfaceMode);
 
         router.push(PRIVATE_ROUTES.home);
       },

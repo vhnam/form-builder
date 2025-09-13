@@ -39,7 +39,7 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/) with stri
 - **Framework**: Next.js 15 with App Router
 - **Language**: TypeScript 5.9 (strict mode)
 - **Styling**: TailwindCSS v4
-- **State Management**: React Query (TanStack Query)
+- **State Management**: React Query (TanStack Query), Zustand
 - **Forms**: React Hook Form with Zod validation
 - **UI Components**: Custom design system with Shadcn UI
 

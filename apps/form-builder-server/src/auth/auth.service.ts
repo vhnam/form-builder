@@ -17,6 +17,7 @@ import {
   LogoutDto,
   RegisterDto,
   ResetPasswordDto,
+  UpdateProfileDto,
 } from './dto';
 
 import { UserRole } from '../database/schema/users';
@@ -162,7 +163,60 @@ export class AuthService {
       lastName: user.lastName,
       email: user.email,
       role: user.role as UserRole,
+      interfaceMode: user.interfaceMode,
+      interfaceLanguage: user.interfaceLanguage,
       isActive: user.isActive,
+    };
+  }
+
+  async updateProfile(
+    userId: string,
+    updateProfileDto: UpdateProfileDto,
+  ): Promise<GetProfileDto> {
+    const user = await this.usersService.findById(userId);
+
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
+
+    const updateData: Partial<typeof updateProfileDto & { password?: string }> =
+      {};
+
+    if (updateProfileDto.firstName) {
+      updateData.firstName = updateProfileDto.firstName;
+    }
+
+    if (updateProfileDto.lastName) {
+      updateData.lastName = updateProfileDto.lastName;
+    }
+
+    if (updateProfileDto.password) {
+      updateData.password = await bcrypt.hash(updateProfileDto.password, 10);
+    }
+
+    if (updateProfileDto.interfaceMode) {
+      updateData.interfaceMode = updateProfileDto.interfaceMode;
+    }
+
+    if (updateProfileDto.interfaceLanguage) {
+      updateData.interfaceLanguage = updateProfileDto.interfaceLanguage;
+    }
+
+    const updatedUser = await this.usersService.update(userId, updateData);
+
+    if (!updatedUser) {
+      throw new UnauthorizedException('Failed to update profile');
+    }
+
+    return {
+      id: updatedUser.id,
+      firstName: updatedUser.firstName,
+      lastName: updatedUser.lastName,
+      email: updatedUser.email,
+      role: updatedUser.role as UserRole,
+      interfaceMode: updatedUser.interfaceMode,
+      interfaceLanguage: updatedUser.interfaceLanguage,
+      isActive: updatedUser.isActive,
     };
   }
 

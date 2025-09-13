@@ -4,8 +4,8 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["./components/*"],
-      "@/hooks/*": ["./hooks/*"],
       "@/constants/*": ["./constants/*"],
+      "@/hooks/*": ["./hooks/*"],
       "@/layouts/*": ["./layouts/*"],
       "@/mocks/*": ["./mocks/*"],
       "@/modules/*": ["./modules/*"],

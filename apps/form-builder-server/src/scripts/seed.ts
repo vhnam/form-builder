@@ -40,6 +40,12 @@ async function main() {
         role: funcs.valuesFromArray({
           values: ['superadmin'],
         }),
+        interfaceMode: funcs.valuesFromArray({
+          values: ['system'],
+        }),
+        interfaceLanguage: funcs.valuesFromArray({
+          values: ['en-US'],
+        }),
         isActive: funcs.valuesFromArray({
           values: [true],
         }),

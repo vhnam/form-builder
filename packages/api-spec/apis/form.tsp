@@ -54,7 +54,6 @@ namespace LokiForm.Forms {
   @summary("Publish a form")
   @doc("Publishes a form, making it publicly accessible for submissions. Returns a public URL that can be shared with users to access and submit the form.")
   op publishForm(@path formId: string): {
-    @statusCode statusCode: 201;
     publicUrl: string;
   } | ValidationError | UnauthorizedError;
 }
