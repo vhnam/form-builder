@@ -1,5 +1,3 @@
-'use client';
-
 import { PlusIcon } from 'lucide-react';
 
 import { QuestionType } from '@repo/form-ui/enums/question';

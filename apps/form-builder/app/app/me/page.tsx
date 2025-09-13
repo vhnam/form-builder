@@ -1,12 +1,16 @@
 'use client';
 
-import { PrivateLayoutHeader } from '@/layouts/private';
-
 import React, { useRef } from 'react';
+import { toast } from 'sonner';
+
+import { useGetProfileQuery } from '@/services/auth';
+
+import { ErrorBoundary } from '@/components/error-boundary';
+import { Spinner } from '@/components/spinner';
 
 import { Button } from '@repo/core-ui/components/button';
 
-import { useGetProfileQuery } from '@/services/auth';
+import { PrivateLayoutHeader } from '@/layouts/private';
 
 import Profile, { type ProfileFormRef } from '@/modules/profile';
 
@@ -19,7 +23,11 @@ const ProfilePage = () => {
   };
 
   return (
-    <>
+    <ErrorBoundary
+      onError={() => {
+        toast.error('Failed to load profile');
+      }}
+    >
       <PrivateLayoutHeader
         title="Profile"
         actions={
@@ -35,12 +43,8 @@ const ProfilePage = () => {
           </Button>
         }
       />
-      {isPending ? (
-        <div>Loading...</div>
-      ) : (
-        <Profile ref={profileFormRef} user={data} />
-      )}
-    </>
+      {isPending ? <Spinner /> : <Profile ref={profileFormRef} user={data} />}
+    </ErrorBoundary>
   );
 };
 

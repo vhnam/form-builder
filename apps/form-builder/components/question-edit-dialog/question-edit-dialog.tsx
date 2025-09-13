@@ -1,5 +1,3 @@
-'use client';
-
 import { ReactNode } from 'react';
 
 import { QuestionType } from '@repo/form-ui/enums/question';
